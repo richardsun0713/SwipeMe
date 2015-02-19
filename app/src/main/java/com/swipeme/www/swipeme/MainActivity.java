@@ -18,6 +18,7 @@ import com.facebook.widget.LoginButton;
 import com.facebook.model.GraphUser;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton.UserInfoChangedCallback;
+import com.parse.Parse;
 
 /*
 public class MainActivity extends ActionBarActivity {
@@ -95,7 +96,12 @@ public class MainActivity extends FragmentActivity {
                     }
                 }
             });
-        }
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "vhQM6PPW6eQOImqAi1ixKE12fcnM5QSzotSUI9Dh", "DdOmhTSFB5HALDBFHdmPvjeBV6I7umDPgDEvxrTX");
+
+    }
 
     private Session.StatusCallback statusCallback = new Session.StatusCallback() {
         @Override
