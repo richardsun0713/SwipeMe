@@ -19,6 +19,7 @@ import com.facebook.model.GraphUser;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton.UserInfoChangedCallback;
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 /*
 public class MainActivity extends ActionBarActivity {
@@ -100,6 +101,11 @@ public class MainActivity extends FragmentActivity {
         Parse.enableLocalDatastore(this);
 
         Parse.initialize(this, "vhQM6PPW6eQOImqAi1ixKE12fcnM5QSzotSUI9Dh", "DdOmhTSFB5HALDBFHdmPvjeBV6I7umDPgDEvxrTX");
+
+        // Parse Testing
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
 
     }
 
