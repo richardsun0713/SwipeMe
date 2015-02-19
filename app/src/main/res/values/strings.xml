@@ -3,7 +3,27 @@
 
     <string name="app_name">SwipeMe</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="facebook_app_id">339292299592657</string>
+
+    <!--Menu Options-->
+
+    <string name="action_settings">Settings</string>
+    <string name="action_listings">My Listings</string>
+    <string name="action_messages">Messages</string>
+    <string name="action_notifications">Notifications</string>
+    <string name="action_logout">Log Out</string>
+
+    <!--Dining Halls-->
+
+    <string name="food_deneve">De Neve</string>
+    <string name="food_feast">Feast</string>
+    <string name="food_bplate">Bruin Plate</string>
+    <string name="food_covel">Covel</string>
+    <string name="food_bcafe">Bruin Cafe</string>
+    <string name="food_1919">Cafe 1919</string>
+    <string name="food_rendez">Rendezvous</string>
+    <string name="food_latenight">De Neve Late Night</string>
+    <string name="food_hedrick">Hedrick Late Night</string>
+
 
 </resources>
