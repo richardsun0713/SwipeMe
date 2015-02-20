@@ -8,24 +8,21 @@ import com.facebook.AppEventsLogger;
 
 import android.support.v4.app.FragmentActivity;
 
-/**
- * Created by aaaaa_000 on 2/19/2015.
- */
-
 public class MainActivity extends FragmentActivity {
     private FacebookLoginFragment FacebookLoginFragment;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-// Add the fragment on initial activity setup
+            // Add the fragment on initial activity setup
             FacebookLoginFragment = new FacebookLoginFragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(android.R.id.content, FacebookLoginFragment)
                     .commit();
         } else {
-// Or set the fragment from restored state info
+            // Or set the fragment from restored state info
             FacebookLoginFragment = (FacebookLoginFragment) getSupportFragmentManager()
                     .findFragmentById(android.R.id.content);
         }
@@ -70,3 +67,4 @@ public class MainActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
