@@ -1,21 +1,34 @@
 package com.swipeme.www.swipeme;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.AppEventsLogger;
 
+import android.support.v4.app.FragmentActivity;
+
 /**
  * Created by aaaaa_000 on 2/19/2015.
  */
-public class MainActivity extends ActionBarActivity {
 
+public class MainActivity extends FragmentActivity {
+    private FacebookLoginFragment FacebookLoginFragment;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if (savedInstanceState == null) {
+// Add the fragment on initial activity setup
+            FacebookLoginFragment = new FacebookLoginFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(android.R.id.content, FacebookLoginFragment)
+                    .commit();
+        } else {
+// Or set the fragment from restored state info
+            FacebookLoginFragment = (FacebookLoginFragment) getSupportFragmentManager()
+                    .findFragmentById(android.R.id.content);
+        }
     }
 
     @Override
