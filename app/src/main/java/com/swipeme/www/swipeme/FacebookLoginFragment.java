@@ -3,22 +3,18 @@ package com.swipeme.www.swipeme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.facebook.AppEventsLogger;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.LoginButton.UserInfoChangedCallback;
-
-import java.util.Arrays;
 
 
 public class FacebookLoginFragment extends Fragment {
@@ -67,6 +63,9 @@ public class FacebookLoginFragment extends Fragment {
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, "Logged in...");
+            //We are logged in so start a new activity here
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(intent);
         } else if (state.isClosed()) {
             Log.i(TAG, "Logged out...");
         }
