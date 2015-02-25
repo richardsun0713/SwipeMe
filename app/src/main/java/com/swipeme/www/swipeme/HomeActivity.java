@@ -61,4 +61,9 @@ public class HomeActivity extends ActionBarActivity {
             return rootView;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }
