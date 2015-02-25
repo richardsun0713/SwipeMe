@@ -1,5 +1,7 @@
 package com.swipeme.www.swipeme;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.facebook.Session;
 
 
 public class HomeActivity extends ActionBarActivity {
@@ -42,8 +46,42 @@ public class HomeActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_logout){
+            callFacebookLogout(this);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    /**
+     * Logout From Facebook
+     */
+    public static void callFacebookLogout(Context context) {
+        Session session = Session.getActiveSession();
+        if (session != null) {
+
+            if (!session.isClosed()) {
+                session.closeAndClearTokenInformation();
+                //clear your preferences if saved
+            }
+        } else {
+
+            session = new Session(context);
+            Session.setActiveSession(session);
+
+            session.closeAndClearTokenInformation();
+            //clear your preferences if saved
+
+        }
+
     }
 
     /**
@@ -60,10 +98,8 @@ public class HomeActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
             return rootView;
         }
+
     }
 
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
+
 }
