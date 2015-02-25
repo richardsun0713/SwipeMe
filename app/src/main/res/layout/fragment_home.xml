@@ -102,7 +102,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Buy"
+            android:text="@string/button_buy"
             />
 
         <Button
@@ -110,7 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sell"
+            android:text="@string/button_sell"
             />
     </LinearLayout>
 
