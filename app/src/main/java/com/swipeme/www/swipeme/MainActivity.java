@@ -1,10 +1,13 @@
 package com.swipeme.www.swipeme;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.AppEventsLogger;
+import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.widget.LoginButton;
 import com.facebook.model.GraphUser;
@@ -33,16 +36,6 @@ public class MainActivity extends FragmentActivity {
             FacebookLoginFragment = (FacebookLoginFragment) getSupportFragmentManager()
                     .findFragmentById(android.R.id.content);
         }
-
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-
-        Parse.initialize(this, "vhQM6PPW6eQOImqAi1ixKE12fcnM5QSzotSUI9Dh", "DdOmhTSFB5HALDBFHdmPvjeBV6I7umDPgDEvxrTX");
-
-        // Parse Testing
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
     }
 
     @Override

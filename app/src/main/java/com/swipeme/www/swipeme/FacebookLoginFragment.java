@@ -24,12 +24,14 @@ import java.util.Arrays;
 public class FacebookLoginFragment extends Fragment {
     private static final String TAG = "FacebookLoginFragment";
     private UiLifecycleHelper uiHelper;
+
     private Session.StatusCallback callback = new Session.StatusCallback() {
         @Override
         public void call(Session session, SessionState state, Exception exception) {
             onSessionStateChange(session, state, exception);
         }
     };
+
     public FacebookLoginFragment() {
     // Required empty public constructor
     }
@@ -54,6 +56,10 @@ public class FacebookLoginFragment extends Fragment {
             public void onUserInfoFetched(GraphUser graphUser) {
                 if (graphUser != null) {
                     username.setText("Welcome " + graphUser.getFirstName() + "!");
+
+                    // If user is logged in, switch to MainMenu Activity
+                    Intent intent = new Intent(getActivity(), MainMenu.class);
+                    startActivity(intent);
                 } else {
                     username.setText("You are currently not logged in.");
                 }
