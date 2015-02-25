@@ -1,13 +1,17 @@
 package com.swipeme.www.swipeme;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.facebook.Session;
 
 
 public class HomeActivity extends ActionBarActivity {
@@ -42,6 +46,10 @@ public class HomeActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.action_logout) {
+            callFacebookLogout();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -65,5 +73,24 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    /**
+     * Logout From Facebook
+     */
+    public void callFacebookLogout() {
+        Session session = Session.getActiveSession();
+        Log.w("HomeActivity", "callFacebookLogout");
+        if (session != null) {
+            Log.w("HomeActivity", "Session not null");
+            if (!session.isClosed()) {
+                Log.w("HomeActivity", "Session not closed");
+                session.closeAndClearTokenInformation();
+            }
+        }
+
+        Log.w("HomeActivity", "Finishing activity");
+        // Finish current activity
+        finish();
     }
 }
