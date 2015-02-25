@@ -1,6 +1,7 @@
 package com.swipeme.www.swipeme;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -46,12 +47,42 @@ public class HomeActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        else if (id == R.id.action_logout) {
-            callFacebookLogout();
+        else if (id == R.id.action_logout){
+            callFacebookLogout(this);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    /**
+     * Logout From Facebook
+     */
+    public void callFacebookLogout(Context context) {
+        Session session = Session.getActiveSession();
+        if (session != null) {
+
+            if (!session.isClosed()) {
+                session.closeAndClearTokenInformation();
+                //clear your preferences if saved
+            }
+        } else {
+
+            session = new Session(context);
+            Session.setActiveSession(session);
+
+            session.closeAndClearTokenInformation();
+            //clear your preferences if saved
+
+        }
+
+        // Finish current activity
+        finish();
     }
 
     /**
@@ -68,29 +99,6 @@ public class HomeActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
             return rootView;
         }
-    }
 
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
-
-    /**
-     * Logout From Facebook
-     */
-    public void callFacebookLogout() {
-        Session session = Session.getActiveSession();
-        Log.w("HomeActivity", "callFacebookLogout");
-        if (session != null) {
-            Log.w("HomeActivity", "Session not null");
-            if (!session.isClosed()) {
-                Log.w("HomeActivity", "Session not closed");
-                session.closeAndClearTokenInformation();
-            }
-        }
-
-        Log.w("HomeActivity", "Finishing activity");
-        // Finish current activity
-        finish();
     }
 }
