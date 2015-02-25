@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/blue">
 
     <TextView
         android:id="@+id/SwipeMeLogoText"
@@ -11,14 +12,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="150dp"
-        android:textSize="50sp"/>
+        android:layout_marginTop="50dp"
+        android:textSize="50sp"
+        android:textColor="#FFFFFF"/>
 
     <ImageView
         android:id="@+id/SwipeMeLogo"
-        android:src="@drawable/temp"
+        android:src="@drawable/swipemelogo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginBottom="50dp"
         android:layout_gravity="center_horizontal"/>
 
