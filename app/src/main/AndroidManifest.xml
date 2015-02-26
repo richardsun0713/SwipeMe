@@ -30,8 +30,23 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:launchMode="singleTask"/>
-
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".BuyActivity"
+            android:label="@string/title_activity_buy"
+            android:parentActivityName=".HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.swipeme.www.swipeme.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".SellActivity"
+            android:label="@string/title_activity_sell"
+            android:parentActivityName=".HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.swipeme.www.swipeme.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
