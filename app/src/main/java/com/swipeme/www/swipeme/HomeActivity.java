@@ -1,19 +1,27 @@
 package com.swipeme.www.swipeme;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.facebook.Session;
 
+import java.util.ArrayList;
+
 
 public class HomeActivity extends FragmentActivity {
+
+    String[] array = new String[] {"Bruin Plate", "Covel", "De Neve", "Feast", "Bruin Cafe",
+            "Cafe 1919", "Rendevous", "De Neve Late Night", "Hedrick Late Night"};
 
     private static final String TAG = "HomeActivity";
     @Override
@@ -81,6 +89,28 @@ public class HomeActivity extends FragmentActivity {
         }
         // Finish current activity
         finish();
+    }
+
+    /** Called when the user clicks the Buy button */
+    public void startBuyActivity(View view) {
+
+        // Get checkbox data
+        ArrayList<String> checked = new ArrayList<String>();
+        ListView mListView = (ListView) findViewById(R.id.checkboxList);
+        SparseBooleanArray pos = mListView.getCheckedItemPositions();
+        for (int i = 0; i < array.length; i++) {
+            if (pos.get(i) == true) {
+                checked.add(array[i]);
+            }
+        }
+        Intent intent = new Intent(this, BuyActivity.class);
+        intent.putStringArrayListExtra("list", checked);
+        startActivity(intent);
+    }
+
+    /** Called when the user clicks the Sell button */
+    public void startSellActivity(View view) {
+        Intent intent = new Intent(this, SellActivity.class);
     }
 
     /**

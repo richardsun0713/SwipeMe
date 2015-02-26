@@ -12,12 +12,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/check_halls">
-        <LinearLayout
+        <ListView
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:id="@+id/checkboxList">
 
-            <TextView
+            <!--<TextView
                 android:layout_width="fill_parent"
                 android:layout_height="80dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -32,7 +33,7 @@
                 android:textAlignment="center"
                 android:gravity="center"
                 android:layout_weight="0.2"
-                />
+                />-->
 
             <CheckBox
                 android:id="@+id/check_bplate"
@@ -131,7 +132,7 @@
                 android:textSize="25sp"
                 />
 
-        </LinearLayout>
+        </ListView>
     </ScrollView>
 
     <LinearLayout
@@ -151,7 +152,8 @@
             android:textSize="30sp"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"/>
+            android:fontFamily="sans-serif-medium"
+            android:onClick="startBuyActivity"/>
 
         <Button
             android:layout_width="0dp"
@@ -164,7 +166,7 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            />
+            android:onClick="startSellActivity"/>
     </LinearLayout>
 
 

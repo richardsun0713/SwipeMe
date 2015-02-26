@@ -4,6 +4,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class BuyActivity extends ActionBarActivity {
@@ -12,6 +17,25 @@ public class BuyActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
+
+        ArrayList<String> getChecked;
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            getChecked = extras.getStringArrayList("list");
+        }
+        else {
+            getChecked = null;
+        }
+
+        ListView lv = (ListView) findViewById(R.id.list);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                getChecked
+        );
+
+        lv.setAdapter(arrayAdapter);
     }
 
 
