@@ -95,6 +95,7 @@ public class HomeActivity extends FragmentActivity {
     public void startBuyActivity(View view) {
 
         // Get checkbox data
+        /*
         ArrayList<String> checked = new ArrayList<String>();
         ListView mListView = (ListView) findViewById(R.id.checkboxList);
         SparseBooleanArray pos = mListView.getCheckedItemPositions();
@@ -103,14 +104,16 @@ public class HomeActivity extends FragmentActivity {
                 checked.add(array[i]);
             }
         }
+        */
         Intent intent = new Intent(this, BuyActivity.class);
-        intent.putStringArrayListExtra("list", checked);
+        //intent.putStringArrayListExtra("list", checked);
         startActivity(intent);
     }
 
     /** Called when the user clicks the Sell button */
     public void startSellActivity(View view) {
         Intent intent = new Intent(this, SellActivity.class);
+        startActivity(intent);
     }
 
     /**

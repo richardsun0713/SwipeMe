@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/check_halls">
-        <ListView
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -132,7 +132,7 @@
                 android:textSize="25sp"
                 />
 
-        </ListView>
+        </LinearLayout>
     </ScrollView>
 
     <LinearLayout

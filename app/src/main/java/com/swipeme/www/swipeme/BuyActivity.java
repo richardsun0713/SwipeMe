@@ -1,5 +1,6 @@
 package com.swipeme.www.swipeme;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,14 +12,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class BuyActivity extends ActionBarActivity {
+public class BuyActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
 
-        ArrayList<String> getChecked;
+        /*ArrayList<String> getChecked;
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
@@ -35,7 +36,7 @@ public class BuyActivity extends ActionBarActivity {
                 getChecked
         );
 
-        lv.setAdapter(arrayAdapter);
+        lv.setAdapter(arrayAdapter);*/
     }
 
 
