@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.facebook.Session;
@@ -20,8 +21,12 @@ import java.util.ArrayList;
 
 public class HomeActivity extends FragmentActivity {
 
-    String[] array = new String[] {"Bruin Plate", "Covel", "De Neve", "Feast", "Bruin Cafe",
-            "Cafe 1919", "Rendevous", "De Neve Late Night", "Hedrick Late Night"};
+    private static final String[] m_restaurantNames = new String[] {"Bruin Plate", "Covel", "De Neve", "Feast",
+            "Bruin Cafe", "Cafe 1919", "Rendevous", "De Neve Late Night", "Hedrick Late Night"};
+    private static final String[] m_listIds = new String [] {"check_bplate", "check_covel", "check_deneve",
+            "check_feast", "check_bcafe", "check_1919", "check_rendez", "check_latenight",
+            "check_hedrick" };
+
 
     private static final String TAG = "HomeActivity";
     @Override
@@ -95,24 +100,36 @@ public class HomeActivity extends FragmentActivity {
     public void startBuyActivity(View view) {
 
         // Get checkbox data
-        /*
         ArrayList<String> checked = new ArrayList<String>();
-        ListView mListView = (ListView) findViewById(R.id.checkboxList);
-        SparseBooleanArray pos = mListView.getCheckedItemPositions();
-        for (int i = 0; i < array.length; i++) {
-            if (pos.get(i) == true) {
-                checked.add(array[i]);
+        for (int i = 0; i < m_listIds.length; i++) {
+            CheckBox cb = (CheckBox) findViewById(getResources().getIdentifier(
+                    m_listIds[i], "id", getPackageName()));
+            if (cb.isChecked()) {
+                checked.add(m_restaurantNames[i]);
             }
         }
-        */
+
+        // Start new Buy Activity
         Intent intent = new Intent(this, BuyActivity.class);
-        //intent.putStringArrayListExtra("list", checked);
+        intent.putStringArrayListExtra("checked_restaurants", checked);
         startActivity(intent);
     }
 
     /** Called when the user clicks the Sell button */
     public void startSellActivity(View view) {
+        // Get checkbox data
+        ArrayList<String> checked = new ArrayList<String>();
+        for (int i = 0; i < m_listIds.length; i++) {
+            CheckBox cb = (CheckBox) findViewById(getResources().getIdentifier(
+                    m_listIds[i], "id", getPackageName()));
+            if (cb.isChecked()) {
+                checked.add(m_restaurantNames[i]);
+            }
+        }
+
+        // Start new Sell Activity
         Intent intent = new Intent(this, SellActivity.class);
+        intent.putStringArrayListExtra("checked_restaurants", checked);
         startActivity(intent);
     }
 
