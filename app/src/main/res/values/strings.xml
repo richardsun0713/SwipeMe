@@ -29,10 +29,19 @@
 
     <string name="SwipeMeLogoText">SwipeMe</string>
     <string name="title_activity_home">Home</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_main_activity2">MainActivity2Activity</string>
-    <string name="title_activity_buy">BuyActivity</string>
-    <string name="title_activity_sell">SellActivity</string>
+
+    <!-- Buy Activity -->
+    <string name="title_activity_buy">Buy</string>
+
+    <!-- Sell Activity -->
+    <string name="title_activity_sell">Sell</string>
+    <string name="sell_listview_header">Restaurants Chosen</string>
+    <string name="sell_picktime_header">Time</string>
+    <string name="sell_price_header">Price</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="sell_price_hint">Price</string>
+    <string name="sell_button">Post Offer</string>
 
 
 </resources>
