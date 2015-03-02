@@ -63,7 +63,13 @@ public class SellActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showTimePickerDialog(View v) {
+    public void showStartTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+        
+    }
+
+    public void showEndTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
