@@ -62,6 +62,14 @@
         <activity
             android:name=".MyListingsActivity"
             android:label="@string/title_activity_my_listings" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.swipeme.www.swipeme.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".BuyListingsActivity"
+            android:label="@string/title_activity_buy_listings"
+            android:parentActivityName=".HomeActivity" >>
         </activity>
     </application>
 
