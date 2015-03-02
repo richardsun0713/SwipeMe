@@ -5,11 +5,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.AppEventsLogger;
-import com.facebook.SessionState;
-import com.facebook.widget.LoginButton;
-import com.facebook.model.GraphUser;
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.LoginButton.UserInfoChangedCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 

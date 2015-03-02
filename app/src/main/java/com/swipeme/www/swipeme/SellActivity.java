@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-
+import android.widget.TextView;
+import android.widget.TimePicker;
 import java.util.ArrayList;
 
 
@@ -24,7 +25,7 @@ public class SellActivity extends FragmentActivity {
         setContentView(R.layout.activity_sell);
 
         // Get checked values from HomeActivity
-        ArrayList<String> getChecked = new ArrayList<String>();
+        ArrayList<String> getChecked = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
@@ -36,7 +37,7 @@ public class SellActivity extends FragmentActivity {
          * boxes were selected
          */
         ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 getChecked
@@ -69,8 +70,28 @@ public class SellActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+    public void showStartTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                TextView textView = (TextView) findViewById(
+                        getResources().getIdentifier("start_time_text", "id", getPackageName()));
+                textView.setText("" + hourOfDay + ":" + minute);
+            }
+        };
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+
+    }
+
+    public void showEndTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                TextView textView = (TextView) findViewById(
+                        getResources().getIdentifier("end_time_text", "id", getPackageName()));
+                textView.setText("" + hourOfDay + ":" + minute);
+            }
+        };
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
