@@ -18,22 +18,22 @@
             android:layout_height="fill_parent"
             android:id="@+id/checkboxList">
 
-            <!--<TextView
-                android:layout_width="fill_parent"
-                android:layout_height="80dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="SwipeMe"
-                android:id="@+id/textView"
-                android:layout_gravity="left|center_horizontal"
-                android:textSize="50sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-medium"
-                android:background="@drawable/bluebar"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:layout_weight="0.2"
-                />-->
+            <!--<TextView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                <!--android:text="SwipeMe"-->
+                <!--android:id="@+id/textView"-->
+                <!--android:layout_gravity="left|center_horizontal"-->
+                <!--android:textSize="50sp"-->
+                <!--android:textColor="#FFFFFF"-->
+                <!--android:textStyle="bold"-->
+                <!--android:fontFamily="sans-serif-medium"-->
+                <!--android:background="@drawable/bluebar"-->
+                <!--android:textAlignment="center"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_weight="0.2"-->
+                <!--/>-->
 
             <CheckBox
                 android:id="@+id/check_bplate"
