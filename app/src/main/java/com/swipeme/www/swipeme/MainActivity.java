@@ -6,8 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.AppEventsLogger;
-import com.parse.Parse;
-import com.parse.ParseObject;
 
 public class MainActivity extends FragmentActivity {
     private FacebookLoginFragment FacebookLoginFragment;
@@ -28,15 +26,17 @@ public class MainActivity extends FragmentActivity {
                     .findFragmentById(android.R.id.content);
         }
 
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-
-        Parse.initialize(this, "vhQM6PPW6eQOImqAi1ixKE12fcnM5QSzotSUI9Dh", "DdOmhTSFB5HALDBFHdmPvjeBV6I7umDPgDEvxrTX");
-
-        // Parse Testing
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
+//        // Register parse models
+//        ParseObject.registerSubclass(Message.class);
+//        // Enable Local Datastore.
+//        Parse.enableLocalDatastore(this);
+//
+//        Parse.initialize(this, "vhQM6PPW6eQOImqAi1ixKE12fcnM5QSzotSUI9Dh", "DdOmhTSFB5HALDBFHdmPvjeBV6I7umDPgDEvxrTX");
+//
+//        // Parse Testing
+//        ParseObject testObject = new ParseObject("TestObject");
+//        testObject.put("foo", "bar");
+//        testObject.saveInBackground();
     }
 
     @Override

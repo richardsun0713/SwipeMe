@@ -12,6 +12,13 @@
     <string name="action_notifications">Notifications</string>
     <string name="action_logout">Log Out</string>
 
+    <!--Messaging-->
+    <string name="title_activity_chat">Messages</string>
+    <string name="message_hint">Say anything</string>
+    <string name="send">Send</string>
+    <string name="profile_me">My Profile Pic</string>
+    <string name="profile_other">Other profile pic</string>
+
     <!--Dining Halls-->
 
     <string name="food_deneve">De Neve</string>
@@ -33,6 +40,8 @@
     <string name="title_activity_main_activity2">MainActivity2Activity</string>
     <string name="title_activity_buy">BuyActivity</string>
     <string name="title_activity_sell">SellActivity</string>
+
+
 
 
 </resources>

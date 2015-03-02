@@ -75,6 +75,10 @@ public class HomeActivity extends FragmentActivity {
             callFacebookLogout(this);
             return true;
         }
+        else if (id == R.id.action_messages){
+            Intent intent = new Intent(this, ChatActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
