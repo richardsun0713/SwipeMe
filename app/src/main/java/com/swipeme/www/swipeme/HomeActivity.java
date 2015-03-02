@@ -113,7 +113,7 @@ public class HomeActivity extends FragmentActivity {
 
     /** Called when the user clicks the Buy button */
     public void startBuyActivity(View view) {
-
+/*
         // Get checkbox data
         ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < m_listIds.length; i++) {
@@ -127,12 +127,12 @@ public class HomeActivity extends FragmentActivity {
         // Start new Buy Activity
         Intent intent = new Intent(this, BuyActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", checked);
-        startActivity(intent);
+        startActivity(intent); */
     }
 
     /** Called when the user clicks the Sell button */
     public void startSellActivity(View view) {
-        // Get checkbox data
+     /*   // Get checkbox data
         ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < m_listIds.length; i++) {
             CheckBox cb = (CheckBox) findViewById(getResources().getIdentifier(
@@ -145,7 +145,7 @@ public class HomeActivity extends FragmentActivity {
         // Start new Sell Activity
         Intent intent = new Intent(this, SellActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", checked);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
     /**
