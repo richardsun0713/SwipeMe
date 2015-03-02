@@ -16,29 +16,22 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class BuyActivity extends FragmentActivity {
+public class BuyListingsActivity extends FragmentActivity {
 
     ArrayList<String> getChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buy);
+        setContentView(R.layout.activity_buy_listings);
 
         // Get checked values from HomeActivity
-        if(savedInstanceState == null) {
-            getChecked = new ArrayList<String>();
-            Bundle extras = getIntent().getExtras();
-            if (extras != null) {
-                getChecked = extras.getStringArrayList("checked_restaurants");
-            }
-        } else {
-            if (savedInstanceState.getStringArrayList("getChecked") != null) {
-                getChecked = savedInstanceState.getStringArrayList("getChecked");
-            }
+        getChecked = new ArrayList<String>();
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            getChecked = extras.getStringArrayList("checked_restaurants");
         }
-
-
 
         // Display checked values in ListView
         /* TODO: make display better looking, display appropriate information dependent on which
@@ -52,6 +45,7 @@ public class BuyActivity extends FragmentActivity {
         );
         lv.setAdapter(arrayAdapter);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,38 +68,4 @@ public class BuyActivity extends FragmentActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState)
-    {
-        // Store UI state to the savedInstanceState.
-        // This bundle will be passed to onCreate on next call.  EditText txtName = (EditText)findViewById(R.id.txtName);
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putStringArrayList("getChecked", getChecked);
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-    }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-    }
-
-
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
-
-    public void startBuyListings(View view) {
-        // Start new Buy Activity
-        Intent intent = new Intent(this, BuyListingsActivity.class);
-        intent.putStringArrayListExtra("checked_restaurants", getChecked);
-        startActivity(intent);
-    }
-
-
 }
