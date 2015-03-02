@@ -12,6 +12,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
+import com.facebook.LoginActivity;
 import com.parse.ParseUser;
 
 import java.lang.reflect.Field;
