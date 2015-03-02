@@ -22,7 +22,7 @@ public class SellActivity extends FragmentActivity {
         setContentView(R.layout.activity_sell);
 
         // Get checked values from HomeActivity
-        ArrayList<String> getChecked = new ArrayList<String>();
+        ArrayList<String> getChecked = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
@@ -34,7 +34,7 @@ public class SellActivity extends FragmentActivity {
          * boxes were selected
          */
         ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 getChecked
