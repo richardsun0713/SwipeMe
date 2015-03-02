@@ -51,7 +51,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.swipeme.www.swipeme.HomeActivity" />
         </activity>
-
         <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat"
@@ -60,7 +59,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.swipeme.www.swipeme.HomeActivity" />
         </activity>
-
+        <activity
+            android:name=".MyListingsActivity"
+            android:label="@string/title_activity_my_listings" >
+        </activity>
     </application>
 
 </manifest>

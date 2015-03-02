@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.model.GraphUser;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
@@ -19,7 +23,7 @@ import java.util.List;
 public class LoginActivity extends Activity {
 
     private static final String TAG = "SwipeMe";
-
+    private String user_ID;
     private Dialog progressDialog;
 
     @Override
@@ -69,6 +73,11 @@ public class LoginActivity extends Activity {
 
     private void showHomeActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
+        // Get user id
+        Log.i("LoginActivity", "Attempt to get user id");
+        user_ID = ParseUser.getCurrentUser().getUsername();
+        Log.i("LoginActivity", "user_ID: " + user_ID);
+        intent.putExtra("userID", user_ID);
         startActivity(intent);
     }
 
