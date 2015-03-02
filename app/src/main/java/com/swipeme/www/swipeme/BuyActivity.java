@@ -1,7 +1,7 @@
 package com.swipeme.www.swipeme;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -32,7 +32,7 @@ public class BuyActivity extends FragmentActivity {
         }
 
         // Get checked values from HomeActivity
-        ArrayList<String> getChecked = new ArrayList<String>();
+        ArrayList<String> getChecked = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
@@ -44,7 +44,7 @@ public class BuyActivity extends FragmentActivity {
          * boxes were selected
          */
         ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 getChecked

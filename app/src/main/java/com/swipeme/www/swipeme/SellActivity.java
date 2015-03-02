@@ -1,18 +1,29 @@
 package com.swipeme.www.swipeme;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class SellActivity extends FragmentActivity {
+
+    private Spinner quantity_spinner, price_spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +43,7 @@ public class SellActivity extends FragmentActivity {
         }
 
         // Get checked values from HomeActivity
-        ArrayList<String> getChecked = new ArrayList<String>();
+        ArrayList<String> getChecked = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
@@ -44,12 +55,14 @@ public class SellActivity extends FragmentActivity {
          * boxes were selected
          */
         ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 getChecked
         );
         lv.setAdapter(arrayAdapter);
+
+        addListenerOnSpinnerItemSelection();
     }
 
 
@@ -73,5 +86,50 @@ public class SellActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showStartTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+               Button startButton = (Button) findViewById(R.id.start_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    startButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+
+    }
+
+    public void showEndTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Button endButton = (Button) findViewById(R.id.end_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    endButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void addListenerOnSpinnerItemSelection() {
+        quantity_spinner = (Spinner) findViewById(R.id.quantity_spinner);
+        price_spinner = (Spinner) findViewById(R.id.price_spinner);
+        //quantity_spinner.setOnItemClickListener(new CustomOnItemSelectedListener);
     }
 }

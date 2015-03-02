@@ -26,8 +26,6 @@ public class HomeActivity extends FragmentActivity {
             "check_feast", "check_bcafe", "check_1919", "check_rendez", "check_latenight",
             "check_hedrick" };
 
-
-    private static final String TAG = "HomeActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +114,7 @@ public class HomeActivity extends FragmentActivity {
     public void startBuyActivity(View view) {
 
         // Get checkbox data
-        ArrayList<String> checked = new ArrayList<String>();
+        ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < m_listIds.length; i++) {
             CheckBox cb = (CheckBox) findViewById(getResources().getIdentifier(
                     m_listIds[i], "id", getPackageName()));
@@ -134,7 +132,7 @@ public class HomeActivity extends FragmentActivity {
     /** Called when the user clicks the Sell button */
     public void startSellActivity(View view) {
         // Get checkbox data
-        ArrayList<String> checked = new ArrayList<String>();
+        ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < m_listIds.length; i++) {
             CheckBox cb = (CheckBox) findViewById(getResources().getIdentifier(
                     m_listIds[i], "id", getPackageName()));
@@ -160,8 +158,7 @@ public class HomeActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_home, container, false);
         }
     }
 
