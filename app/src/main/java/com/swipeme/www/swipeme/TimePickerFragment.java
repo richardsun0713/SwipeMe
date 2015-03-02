@@ -15,7 +15,7 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-public class TimePickerFragment extends DialogFragment
+public abstract class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,7 +29,5 @@ public class TimePickerFragment extends DialogFragment
                 DateFormat.is24HourFormat(getActivity()));
     }
 
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // Do something with the time chosen by the user
-    }
+    public abstract void onTimeSet(TimePicker view, int hourOfDay, int minute);
 }

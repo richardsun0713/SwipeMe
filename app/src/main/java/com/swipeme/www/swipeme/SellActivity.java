@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
 
@@ -64,13 +66,27 @@ public class SellActivity extends FragmentActivity {
     }
 
     public void showStartTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                TextView textView = (TextView) findViewById(
+                        getResources().getIdentifier("start_time_text", "id", getPackageName()));
+                textView.setText("" + hourOfDay + ":" + minute);
+            }
+        };
         newFragment.show(getSupportFragmentManager(), "timePicker");
-        
+
     }
 
     public void showEndTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                TextView textView = (TextView) findViewById(
+                        getResources().getIdentifier("end_time_text", "id", getPackageName()));
+                textView.setText("" + hourOfDay + ":" + minute);
+            }
+        };
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 }
