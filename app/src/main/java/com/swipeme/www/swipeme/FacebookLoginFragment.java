@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.LoginButton.UserInfoChangedCallback;
+
 
 
 public class FacebookLoginFragment extends Fragment {
@@ -26,6 +29,7 @@ public class FacebookLoginFragment extends Fragment {
             onSessionStateChange(session, state, exception);
         }
     };
+    String user_ID;
     public FacebookLoginFragment() {
     // Required empty public constructor
     }
@@ -60,11 +64,30 @@ public class FacebookLoginFragment extends Fragment {
         return view;
     }
 
-    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+    private void onSessionStateChange(final Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, "Logged in...");
             //We are logged in so start a new activity here
             Intent intent = new Intent(getActivity(), HomeActivity.class);
+            // Get user id
+            if (session != null && session.isOpened()) {
+                // If the session is open, make an API call to get user data
+                // and define a new callback to handle the response
+                Request request = Request.newMeRequest(session, new Request.GraphUserCallback() {
+                    @Override
+                    public void onCompleted(GraphUser user, Response response) {
+                        // If the response is successful
+                        if (session == Session.getActiveSession()) {
+                            if (user != null) {
+                                user_ID = user.getId(); //user id
+                                Log.i(TAG, user_ID);
+                            }
+                        }
+                    }
+                });
+                Request.executeBatchAsync(request);
+            }
+            intent.putExtra("userID", user_ID);
             startActivity(intent);
         } else if (state.isClosed()) {
             Log.i(TAG, "Logged out...");

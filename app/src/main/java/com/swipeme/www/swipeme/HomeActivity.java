@@ -24,6 +24,7 @@ public class HomeActivity extends FragmentActivity {
     private static final String[] m_listIds = new String [] {"check_bplate", "check_covel", "check_deneve",
             "check_feast", "check_bcafe", "check_1919", "check_rendez", "check_latenight",
             "check_hedrick" };
+    private String user_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,12 @@ public class HomeActivity extends FragmentActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
+        }
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            user_ID = extras.getString("userID");
         }
     }
 
@@ -58,6 +65,11 @@ public class HomeActivity extends FragmentActivity {
         else if (id == R.id.action_logout){
             callFacebookLogout(this);
             return true;
+        }
+        else if (id == R.id.action_listings) {
+            Intent intent = new Intent(this, MyListingsActivity.class);
+            intent.putExtra("UserID", user_ID);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
