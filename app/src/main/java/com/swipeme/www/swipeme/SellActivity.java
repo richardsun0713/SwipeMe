@@ -8,11 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
 
 public class SellActivity extends FragmentActivity {
+
+    private Spinner quantity_spinner, price_spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class SellActivity extends FragmentActivity {
                 getChecked
         );
         lv.setAdapter(arrayAdapter);
+
+        addListenerOnSpinnerItemSelection();
     }
 
 
@@ -66,5 +71,11 @@ public class SellActivity extends FragmentActivity {
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void addListenerOnSpinnerItemSelection() {
+        quantity_spinner = (Spinner) findViewById(R.id.quantity_spinner);
+        price_spinner = (Spinner) findViewById(R.id.price_spinner);
+        //quantity_spinner.setOnItemClickListener(new CustomOnItemSelectedListener);
     }
 }

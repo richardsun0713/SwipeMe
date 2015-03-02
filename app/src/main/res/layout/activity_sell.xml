@@ -14,11 +14,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/sell_listview_header"/>
+
         <ListView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="230dp"
             android:id="@+id/list">
         </ListView>
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -44,22 +46,34 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/sell_price_header"/>
-        <EditText
-            android:id="@+id/sell_price"
-            android:inputType="numberDecimal"
-            android:hint="@string/sell_price_hint"
+        <Spinner
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/price_spinner"
+            android:entries="@array/price_array"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/quantity_header"/>
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/quantity_spinner"
+            android:entries="@array/quantity_array"/>
+
     </LinearLayout>
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true"
+        android:id="@+id/relativeLayout">
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/sell_button"/>
     </RelativeLayout>
+
+
 
 
 </RelativeLayout>
