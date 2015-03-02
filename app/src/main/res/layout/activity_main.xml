@@ -1,30 +1,29 @@
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/blue">
+    android:background="@drawable/blue"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/SwipeMeLogoText"
-        android:text="@string/SwipeMeLogoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:textSize="50sp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/SwipeMeLogoText"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-medium"/>
+        android:textSize="50sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/SwipeMeLogo"
-        android:src="@drawable/swipemelogo"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="50dp"
-        android:layout_gravity="center_horizontal"/>
+        android:src="@drawable/swipemelogo" />
 
     <TextView
         android:id="@+id/username"
@@ -34,12 +33,35 @@
         android:layout_margin="10dp"
         android:textSize="16sp" />
 
-    <com.facebook.widget.LoginButton
-        android:id="@+id/authButton"
+    <!--<com.facebook.widget.LoginButton-->
+    <!--android:id="@+id/authButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:onClick="onLoginClick"/>-->
+
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"/>
-    </LinearLayout>
+        android:layout_marginTop="10dp"
+
+        android:text="@string/com_facebook_loginview_log_in_button"
+        android:textColor="@color/com_facebook_loginview_text_color"
+        android:textSize="@dimen/com_facebook_loginview_text_size"
+        android:textStyle="bold"
+
+        android:background="@drawable/com_facebook_button_blue"
+        android:drawableLeft="@drawable/com_facebook_inverse_icon"
+        android:drawablePadding="@dimen/com_facebook_likebutton_compound_drawable_padding"
+        android:paddingLeft="@dimen/com_facebook_loginview_padding_left"
+        android:paddingTop="@dimen/com_facebook_loginview_padding_top"
+        android:paddingRight="@dimen/com_facebook_loginview_padding_right"
+        android:paddingBottom="@dimen/com_facebook_loginview_padding_bottom"
+        android:onClick="onLoginClick"/>
+
+</LinearLayout>
 
 

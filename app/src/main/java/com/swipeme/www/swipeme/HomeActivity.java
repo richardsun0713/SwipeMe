@@ -1,6 +1,5 @@
 package com.swipeme.www.swipeme;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
-import com.facebook.Session;
+import com.parse.ParseUser;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -72,7 +71,8 @@ public class HomeActivity extends FragmentActivity {
             return true;
         }
         else if (id == R.id.action_logout){
-            callFacebookLogout(this);
+//            callFacebookLogout(this);
+            logout();
             return true;
         }
         else if (id == R.id.action_messages){
@@ -88,29 +88,29 @@ public class HomeActivity extends FragmentActivity {
         moveTaskToBack(true);
     }
 
-    /**
-     * Logout From Facebook
-     */
-    public void callFacebookLogout(Context context) {
-        Session session = Session.getActiveSession();
-        if (session != null) {
-
-            if (!session.isClosed()) {
-                session.closeAndClearTokenInformation();
-                //clear your preferences if saved
-            }
-        } else {
-
-            session = new Session(context);
-            Session.setActiveSession(session);
-
-            session.closeAndClearTokenInformation();
-            //clear your preferences if saved
-
-        }
-        // Finish current activity
-        finish();
-    }
+//    /**
+//     * Logout From Facebook
+//     */
+//    public void callFacebookLogout(Context context) {
+//        Session session = Session.getActiveSession();
+//        if (session != null) {
+//
+//            if (!session.isClosed()) {
+//                session.closeAndClearTokenInformation();
+//                //clear your preferences if saved
+//            }
+//        } else {
+//
+//            session = new Session(context);
+//            Session.setActiveSession(session);
+//
+//            session.closeAndClearTokenInformation();
+//            //clear your preferences if saved
+//
+//        }
+//        // Finish current activity
+//        finish();
+//    }
 
     /** Called when the user clicks the Buy button */
     public void startBuyActivity(View view) {
@@ -163,6 +163,19 @@ public class HomeActivity extends FragmentActivity {
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
             return rootView;
         }
+    }
 
+    private void logout() {
+        // Log the user out
+        ParseUser.logOut();
+        // Go to the login view
+        startLoginActivity();
+    }
+
+    private void startLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

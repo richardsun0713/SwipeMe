@@ -50,7 +50,7 @@ public class ChatActivity extends Activity {
         }
 
         // Run the runnable object defined every 100ms
-        handler.postDelayed(runnable, 100);
+       // handler.postDelayed(runnable, 100);
     }
 
     // Defines a runnable which is run every 100ms
