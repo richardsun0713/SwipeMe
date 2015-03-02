@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 public abstract class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
-    
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
