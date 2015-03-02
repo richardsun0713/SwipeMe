@@ -8,11 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class SellActivity extends FragmentActivity {
@@ -74,9 +78,16 @@ public class SellActivity extends FragmentActivity {
         DialogFragment newFragment = new TimePickerFragment() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                TextView textView = (TextView) findViewById(
-                        getResources().getIdentifier("start_time_text", "id", getPackageName()));
-                textView.setText("" + hourOfDay + ":" + minute);
+               Button startButton = (Button) findViewById(R.id.start_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    startButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         newFragment.show(getSupportFragmentManager(), "timePicker");
@@ -87,9 +98,16 @@ public class SellActivity extends FragmentActivity {
         DialogFragment newFragment = new TimePickerFragment() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                TextView textView = (TextView) findViewById(
-                        getResources().getIdentifier("end_time_text", "id", getPackageName()));
-                textView.setText("" + hourOfDay + ":" + minute);
+                Button endButton = (Button) findViewById(R.id.end_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    endButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         newFragment.show(getSupportFragmentManager(), "timePicker");
