@@ -1,7 +1,6 @@
 package com.swipeme.www.swipeme;
 
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,10 +13,6 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
-import com.facebook.model.GraphUser;
 import com.parse.ParseUser;
 
 import java.lang.reflect.Field;
@@ -90,6 +85,7 @@ public class HomeActivity extends FragmentActivity {
         }
         else if (id == R.id.action_messages) {
             Intent intent = new Intent(this, ChatActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.action_listings) {
             Intent intent = new Intent(this, MyListingsActivity.class);
