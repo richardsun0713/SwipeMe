@@ -143,7 +143,7 @@
 -->
           <Button
              android:layout_width="fill_parent"
-             android:layout_height="150dp"
+             android:layout_height="125dp"
              android:id="@+id/bplateButton"
              android:background="@drawable/bruinplate"
              android:adjustViewBounds="true"
@@ -154,7 +154,7 @@
             android:text="  Bruin Plate"/>
             <Button
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="125dp"
                 android:id="@+id/covelButton"
                 android:background="@drawable/covel"
                 android:adjustViewBounds="true"
@@ -165,7 +165,7 @@
                 android:text="  Covel Dining"/>
             <Button
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="125dp"
                 android:id="@+id/feastButton"
                 android:background="@drawable/feast"
                 android:adjustViewBounds="true"
@@ -176,7 +176,7 @@
                 android:text="  Feast Dining"/>
             <Button
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="125dp"
                 android:id="@+id/bruincafeButton"
                 android:background="@drawable/bruincafe"
                 android:adjustViewBounds="true"
@@ -187,7 +187,7 @@
                 android:text=" Bruin Cafe"/>
             <Button
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="125dp"
                 android:id="@+id/cafe1919eButton"
                 android:background="@drawable/cafe1919"
                 android:adjustViewBounds="true"
@@ -198,7 +198,7 @@
                 android:text=" Cafe 1919"/>
             <Button
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="125dp"
                 android:id="@+id/latenightButton"
                 android:background="@drawable/latenight"
                 android:adjustViewBounds="true"
@@ -209,7 +209,7 @@
                 android:text=" De Neve Late Night"/>
             <Button
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="125dp"
                 android:id="@+id/hedricklatenightButton"
                 android:background="@drawable/hedricklatenight"
                 android:adjustViewBounds="true"
