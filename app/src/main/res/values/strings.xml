@@ -19,7 +19,7 @@
     <string name="profile_me">My Profile Pic</string>
     <string name="profile_other">Other profile pic</string>
 
-    <!--Dining Halls-->
+    <!-- Dining Halls -->
 
     <string name="food_deneve">De Neve</string>
     <string name="food_feast">Feast</string>
@@ -30,10 +30,8 @@
     <string name="food_rendez">Rendezvous</string>
     <string name="food_latenight">De Neve Late Night</string>
     <string name="food_hedrick">Hedrick Late Night</string>
-
     <string name="button_buy">Buy</string>
     <string name="button_sell">Sell</string>
-
     <string name="SwipeMeLogoText">SwipeMe</string>
     <string name="title_activity_home">Home</string>
 
@@ -92,5 +90,10 @@
     <string name="title_activity_my_listings">MyListingsActivity</string>
 
     <string name="hello_world">Hello world!</string>
+
+
+    <!-- Buy Listings Values -->
+    <string name="title_activity_buy_listings">BuyListingsActivity</string>
+    <string name="buy_search_for_listings">Search for Listings</string>
 
 </resources>

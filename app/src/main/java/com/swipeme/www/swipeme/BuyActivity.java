@@ -1,18 +1,27 @@
 package com.swipeme.www.swipeme;
 
+import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TimePicker;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class BuyActivity extends FragmentActivity {
+
+    ArrayList<String> getChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +41,19 @@ public class BuyActivity extends FragmentActivity {
         }
 
         // Get checked values from HomeActivity
-        ArrayList<String> getChecked = new ArrayList<>();
-        Bundle extras = getIntent().getExtras();
-        if(extras != null)
-        {
-            getChecked = extras.getStringArrayList("checked_restaurants");
+        if(savedInstanceState == null) {
+            getChecked = new ArrayList<String>();
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                getChecked = extras.getStringArrayList("checked_restaurants");
+            }
+        } else {
+            // Load saved instance state if exists
+            if (savedInstanceState.getStringArrayList("getChecked") != null) {
+                getChecked = savedInstanceState.getStringArrayList("getChecked");
+            }
         }
+
 
         // Display checked values in ListView
         /* TODO: make display better looking, display appropriate information dependent on which
@@ -51,7 +67,6 @@ public class BuyActivity extends FragmentActivity {
         );
         lv.setAdapter(arrayAdapter);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,4 +89,72 @@ public class BuyActivity extends FragmentActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState)
+    {
+        // Store UI state to the savedInstanceState.
+        // This bundle will be passed to onCreate on next call.  EditText txtName = (EditText)findViewById(R.id.txtName);
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putStringArrayList("getChecked", getChecked);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+    }
+
+
+    public void showStartTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Button startButton = (Button) findViewById(R.id.start_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    startButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+
+    }
+
+    public void showEndTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Button endButton = (Button) findViewById(R.id.end_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    endButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void startBuyListings(View view) {
+        // Start new Buy Activity
+        Intent intent = new Intent(this, BuyListingsActivity.class);
+        intent.putStringArrayListExtra("checked_restaurants", getChecked);
+        startActivity(intent);
+    }
+
+
 }
