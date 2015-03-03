@@ -27,6 +27,7 @@
         android:orientation="horizontal"
         android:layout_alignParentRight="true">
         <Button
+            android:id="@+id/cancel_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="Delete Listing" />

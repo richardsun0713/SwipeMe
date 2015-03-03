@@ -79,7 +79,7 @@ public class MyListingsActivity extends FragmentActivity {
             public void onLoaded(java.util.List<ParseObject> list, java.lang.Exception e) {
                 // Execute any post-loading logic, hide "loading" UI
                 Log.i("MyListingsActivity", "Retrieved " + list.size() + " listings");
-                hideProgressBar();
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -103,10 +103,6 @@ public class MyListingsActivity extends FragmentActivity {
         // Must add the progress bar to the root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
         root.addView(layout);
-    }
-
-    private void hideProgressBar() {
-
     }
 
     private ListView getListView() {

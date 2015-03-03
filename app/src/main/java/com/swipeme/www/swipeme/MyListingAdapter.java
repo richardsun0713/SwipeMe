@@ -1,10 +1,15 @@
 package com.swipeme.www.swipeme;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parse.DeleteCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
@@ -26,7 +31,7 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
 
     // Customize the layout by overriding getItemView
     @Override
-    public View getItemView(ParseObject object, View v, ViewGroup parent) {
+    public View getItemView(final ParseObject object, View v, ViewGroup parent) {
         if (v == null) {
             v = View.inflate(getContext(), R.layout.my_listing_item, null);
         }
@@ -46,7 +51,34 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
         TextView restaurantsView = (TextView) v.findViewById(R.id.restaurants);
         restaurantsView.setText(object.getList("restaurants").toString());
 
+        // Add button click function
+        Button button = (Button) v.findViewById(R.id.cancel_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                // Delete object from database
+                object.deleteInBackground(new DeleteCallback() {
+                    // Reload the adapter if deletion succeeded
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(getContext(),
+                                    "Listing Successfully Deleted!", Toast.LENGTH_LONG).show();
+                            getMyListingAdapter().loadObjects();
+                        }
+                        else {
+                            Log.e("MyListingAdapter", "Offer deletion failed");
+                        }
+                    }
+                });
+            }
+        });
+
         return v;
+    }
+
+    private MyListingAdapter getMyListingAdapter() {
+        return this;
     }
 
 }
