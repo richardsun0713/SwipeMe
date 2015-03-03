@@ -64,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" >
         <Button
+            android:id="@+id/search_for_listings_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/buy_search_for_listings"
