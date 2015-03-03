@@ -24,7 +24,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/checkboxList">
 
             <!--<TextView-->
@@ -141,83 +141,70 @@
                 android:textSize="25sp"
                 />
 -->
-          <Button
+          <ToggleButton
              android:layout_width="fill_parent"
              android:layout_height="125dp"
              android:id="@+id/bplateButton"
-             android:background="@drawable/bruinplate"
+             android:background="@drawable/ic_toggle_bg_bruinplate"
              android:adjustViewBounds="true"
              android:scaleType="fitXY"
-             android:gravity="start|top"
-              android:textStyle="bold"
-              android:textColor="#ffffff"
-            android:text="  Bruin Plate"/>
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="125dp"
-                android:id="@+id/covelButton"
-                android:background="@drawable/covel"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:gravity="start|top"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:text="  Covel Dining"/>
-            <Button
+              style="@style/toggleBruinPlate"/>
+
+            <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="125dp"
                 android:id="@+id/feastButton"
-                android:background="@drawable/feast"
+                android:background="@drawable/ic_toggle_bg_feast"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:gravity="start|top"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:text="  Feast Dining"/>
-            <Button
+                style="@style/toggleFeast"/>
+
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="125dp"
+                android:id="@+id/covelButton"
+                android:background="@drawable/ic_toggle_bg_covel"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:checked="false" />
+
+            <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="125dp"
                 android:id="@+id/bruincafeButton"
-                android:background="@drawable/bruincafe"
+                android:background="@drawable/ic_toggle_bg_bruincafe"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:gravity="start|top"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:text=" Bruin Cafe"/>
-            <Button
+                style="@style/toggleBruinCafe"/>
+            <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="125dp"
                 android:id="@+id/cafe1919eButton"
-                android:background="@drawable/cafe1919"
+                android:background="@drawable/ic_toggle_bg_cafe1919"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:gravity="start|top"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:text=" Cafe 1919"/>
-            <Button
+                style="@style/toggleCafe1919"/>
+            <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="125dp"
                 android:id="@+id/latenightButton"
-                android:background="@drawable/latenight"
+                android:background="@drawable/ic_toggle_bg_latenight"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:gravity="start|top"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:text=" De Neve Late Night"/>
-            <Button
+                style="@style/toggleLateNight"/>
+
+            <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="125dp"
                 android:id="@+id/hedricklatenightButton"
-                android:background="@drawable/hedricklatenight"
+                android:background="@drawable/ic_toggle_bg_rendezvous"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:gravity="start|top"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:text=" Hedrick Late Night"/>
+                style="@style/toggleRendezvous"/>
+            
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="50dp" />
 
         </LinearLayout>
     </ScrollView>
@@ -242,7 +229,8 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:onClick="startBuyActivity"/>
+            android:onClick="startBuyActivity"
+            style='?android:attr/buttonBarButtonStyle'/>
 
         <Button
             android:layout_width="0dp"
