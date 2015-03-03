@@ -5,15 +5,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,19 +33,7 @@ public class MyListingsActivity extends FragmentActivity {
 
         Log.d("MyListingActivity", "UserID: " + user_ID);
 
-        // Retrieve listings from Parse
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Offers");
-        query.whereEqualTo("userID", user_ID);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> myListingsList, ParseException e) {
-                if (e == null) {
-                    Log.d("score", "Retrieved " + myListingsList.size() + " listings");
-                    // TODO: add listings to listView
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-            }
-        });
+        displayListings();
     }
 
 
@@ -72,4 +58,39 @@ public class MyListingsActivity extends FragmentActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void displayListings() {
+        // Instantiate a QueryFactory to define the ParseQuery to be used for fetching items in this
+        // Adapter.
+        ParseQueryAdapter.QueryFactory<ParseObject> factory =
+                new ParseQueryAdapter.QueryFactory<ParseObject>() {
+                    public ParseQuery create() {
+                        ParseQuery query = new ParseQuery("Offers");
+                        query.whereEqualTo("userID", user_ID);
+                        query.orderByAscending("createdAt");
+                        return query;
+                    }
+                };
+
+        // Pass the factory into the ParseQueryAdapter's constructor.
+        final ParseQueryAdapter adapter = new MyListingAdapter(this, user_ID);
+        adapter.setTextKey("name");
+
+        // Set a callback to be fired upon successful loading of a new set of ParseObjects.
+        adapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<ParseObject>() {
+            public void onLoading() {
+                // Trigger any "loading" UI
+            }
+
+            public void onLoaded(java.util.List<ParseObject> list, java.lang.Exception e) {
+                // Execute any post-loading logic, hide "loading" UI
+                Log.i("MyListingsActivity", "Retrieved " + list.size() + " listings");
+            }
+        });
+
+        // Attach to listView
+        ListView listView = (ListView) findViewById(R.id.listview);
+        listView.setAdapter(adapter);
+    }
+
 }
