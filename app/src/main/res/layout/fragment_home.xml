@@ -166,7 +166,7 @@
                 android:background="@drawable/ic_toggle_bg_covel"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:checked="false" />
+                style="@style/toggleCovel" />
 
             <ToggleButton
                 android:layout_width="fill_parent"
