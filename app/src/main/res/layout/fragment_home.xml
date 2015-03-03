@@ -171,6 +171,15 @@
             <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="120dp"
+                android:id="@+id/deneveButton"
+                android:background="@drawable/ic_toggle_bg_deneve"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                style="@style/toggleDeNeve" />
+
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
                 android:id="@+id/bruincafeButton"
                 android:background="@drawable/ic_toggle_bg_bruincafe"
                 android:adjustViewBounds="true"
@@ -179,7 +188,7 @@
             <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="120dp"
-                android:id="@+id/cafe1919eButton"
+                android:id="@+id/cafe1919Button"
                 android:background="@drawable/ic_toggle_bg_cafe1919"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
@@ -196,7 +205,7 @@
             <ToggleButton
                 android:layout_width="fill_parent"
                 android:layout_height="120dp"
-                android:id="@+id/hedricklatenightButton"
+                android:id="@+id/rendezvousButton"
                 android:background="@drawable/ic_toggle_bg_rendezvous"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
