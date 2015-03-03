@@ -143,7 +143,7 @@
 -->
           <ToggleButton
              android:layout_width="fill_parent"
-             android:layout_height="125dp"
+             android:layout_height="120dp"
              android:id="@+id/bplateButton"
              android:background="@drawable/ic_toggle_bg_bruinplate"
              android:adjustViewBounds="true"
@@ -152,7 +152,7 @@
 
             <ToggleButton
                 android:layout_width="fill_parent"
-                android:layout_height="125dp"
+                android:layout_height="120dp"
                 android:id="@+id/feastButton"
                 android:background="@drawable/ic_toggle_bg_feast"
                 android:adjustViewBounds="true"
@@ -161,7 +161,7 @@
 
             <ToggleButton
                 android:layout_width="fill_parent"
-                android:layout_height="125dp"
+                android:layout_height="120dp"
                 android:id="@+id/covelButton"
                 android:background="@drawable/ic_toggle_bg_covel"
                 android:adjustViewBounds="true"
@@ -170,7 +170,7 @@
 
             <ToggleButton
                 android:layout_width="fill_parent"
-                android:layout_height="125dp"
+                android:layout_height="120dp"
                 android:id="@+id/bruincafeButton"
                 android:background="@drawable/ic_toggle_bg_bruincafe"
                 android:adjustViewBounds="true"
@@ -178,7 +178,7 @@
                 style="@style/toggleBruinCafe"/>
             <ToggleButton
                 android:layout_width="fill_parent"
-                android:layout_height="125dp"
+                android:layout_height="120dp"
                 android:id="@+id/cafe1919eButton"
                 android:background="@drawable/ic_toggle_bg_cafe1919"
                 android:adjustViewBounds="true"
@@ -186,7 +186,7 @@
                 style="@style/toggleCafe1919"/>
             <ToggleButton
                 android:layout_width="fill_parent"
-                android:layout_height="125dp"
+                android:layout_height="120dp"
                 android:id="@+id/latenightButton"
                 android:background="@drawable/ic_toggle_bg_latenight"
                 android:adjustViewBounds="true"
@@ -195,7 +195,7 @@
 
             <ToggleButton
                 android:layout_width="fill_parent"
-                android:layout_height="125dp"
+                android:layout_height="120dp"
                 android:id="@+id/hedricklatenightButton"
                 android:background="@drawable/ic_toggle_bg_rendezvous"
                 android:adjustViewBounds="true"
@@ -204,7 +204,7 @@
             
             <Button
                 android:layout_width="fill_parent"
-                android:layout_height="45dp" />
+                android:layout_height="47.5dp" />
 
         </LinearLayout>
     </ScrollView>
