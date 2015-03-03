@@ -3,17 +3,20 @@ package com.swipeme.www.swipeme;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.TimePicker;
 
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class BuyActivity extends FragmentActivity {
@@ -25,6 +28,18 @@ public class BuyActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
 
+        //make dropdown show even if phone has menu option
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ex) {
+            // Ignore
+        }
+
         // Get checked values from HomeActivity
         if(savedInstanceState == null) {
             getChecked = new ArrayList<String>();
@@ -33,11 +48,11 @@ public class BuyActivity extends FragmentActivity {
                 getChecked = extras.getStringArrayList("checked_restaurants");
             }
         } else {
+            // Load saved instance state if exists
             if (savedInstanceState.getStringArrayList("getChecked") != null) {
                 getChecked = savedInstanceState.getStringArrayList("getChecked");
             }
         }
-
 
 
         // Display checked values in ListView
@@ -45,7 +60,7 @@ public class BuyActivity extends FragmentActivity {
          * boxes were selected
          */
         ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 getChecked
@@ -95,8 +110,42 @@ public class BuyActivity extends FragmentActivity {
     }
 
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+    public void showStartTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Button startButton = (Button) findViewById(R.id.start_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    startButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+
+    }
+
+    public void showEndTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Button endButton = (Button) findViewById(R.id.end_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    endButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
