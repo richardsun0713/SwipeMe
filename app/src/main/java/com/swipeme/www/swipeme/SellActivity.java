@@ -1,6 +1,7 @@
 package com.swipeme.www.swipeme;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.DialogFragment;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 public class SellActivity extends FragmentActivity {
 
     private Spinner quantity_spinner, price_spinner;
+    private String user_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,13 @@ public class SellActivity extends FragmentActivity {
         lv.setAdapter(arrayAdapter);
 
         addListenerOnSpinnerItemSelection();
+
+        // Retrieve userID
+        if(extras != null)
+        {
+            user_ID = extras.getString("userID");
+        }
+        Log.d("HomeActivity", "UserID: " + user_ID);
     }
 
 
@@ -156,10 +165,16 @@ public class SellActivity extends FragmentActivity {
         userOffer.put("timeEnd",endButton.getText());
         Log.i("LoginActivity", "timeEnd: " +endButton.getText());
         userOffer.put("restaurants",getChecked);
-        userOffer.put("userID",extras.getString("userID"));
-        Log.i("LoginActivity", "userID: " + extras.getString("userID"));
+        userOffer.put("userID", user_ID);
+        Log.i("LoginActivity", "userID: " + user_ID);
         Toast.makeText(getApplicationContext(),
                 "Offer Successfully Posted!", Toast.LENGTH_LONG).show();
         userOffer.saveInBackground();
+
+        // Start MyListingActivity
+        Intent intent = new Intent(this, MyListingsActivity.class);
+        intent.putExtra("userID", user_ID);
+        finish();
+        startActivity(intent);
     }
 }

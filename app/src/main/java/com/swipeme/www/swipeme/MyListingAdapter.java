@@ -63,7 +63,7 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
                     public void done(ParseException e) {
                         if (e == null) {
                             Toast.makeText(getContext(),
-                                    "Listing Successfully Deleted!", Toast.LENGTH_LONG).show();
+                                    "Listing Successfully Deleted!", Toast.LENGTH_SHORT).show();
                             getMyListingAdapter().loadObjects();
                         }
                         else {
