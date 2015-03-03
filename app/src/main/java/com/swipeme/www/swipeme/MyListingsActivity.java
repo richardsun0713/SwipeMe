@@ -3,9 +3,14 @@ package com.swipeme.www.swipeme;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -60,18 +65,6 @@ public class MyListingsActivity extends FragmentActivity {
     }
 
     private void displayListings() {
-        // Instantiate a QueryFactory to define the ParseQuery to be used for fetching items in this
-        // Adapter.
-        ParseQueryAdapter.QueryFactory<ParseObject> factory =
-                new ParseQueryAdapter.QueryFactory<ParseObject>() {
-                    public ParseQuery create() {
-                        ParseQuery query = new ParseQuery("Offers");
-                        query.whereEqualTo("userID", user_ID);
-                        query.orderByAscending("createdAt");
-                        return query;
-                    }
-                };
-
         // Pass the factory into the ParseQueryAdapter's constructor.
         final ParseQueryAdapter adapter = new MyListingAdapter(this, user_ID);
         adapter.setTextKey("name");
@@ -80,17 +73,44 @@ public class MyListingsActivity extends FragmentActivity {
         adapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<ParseObject>() {
             public void onLoading() {
                 // Trigger any "loading" UI
+                createProgressBar();
             }
 
             public void onLoaded(java.util.List<ParseObject> list, java.lang.Exception e) {
                 // Execute any post-loading logic, hide "loading" UI
                 Log.i("MyListingsActivity", "Retrieved " + list.size() + " listings");
+                hideProgressBar();
             }
         });
 
         // Attach to listView
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
+    }
+
+    private void createProgressBar() {
+        // Create a progress bar to display while the list loads
+        RelativeLayout layout = new RelativeLayout(this);
+        ProgressBar progressBar = new ProgressBar(this);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.VISIBLE);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        layout.addView(progressBar,params);
+
+        getListView().setEmptyView(progressBar);
+
+        // Must add the progress bar to the root of the layout
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.addView(layout);
+    }
+
+    private void hideProgressBar() {
+
+    }
+
+    private ListView getListView() {
+        return (ListView) findViewById(R.id.listview);
     }
 
 }
