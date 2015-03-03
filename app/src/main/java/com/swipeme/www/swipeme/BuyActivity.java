@@ -1,9 +1,11 @@
 package com.swipeme.www.swipeme;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -42,7 +44,6 @@ public class BuyActivity extends FragmentActivity {
         }
 
         // Get checked values from HomeActivity
-        ArrayList<String> getChecked = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
@@ -82,15 +83,6 @@ public class BuyActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState)
-    {
-        // Store UI state to the savedInstanceState.
-        // This bundle will be passed to onCreate on next call.  EditText txtName = (EditText)findViewById(R.id.txtName);
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putStringArrayList("getChecked", getChecked);
     }
 
     @Override
@@ -144,11 +136,27 @@ public class BuyActivity extends FragmentActivity {
     }
 
     public void startBuyListings(View view) {
+        //Check to see if we should enable the search listing button.
+        Button startButton = (Button) findViewById(R.id.start_time_button);
+        Button endButton = (Button) findViewById(R.id.end_time_button);
+        if (startButton.getText().equals("Start Time") || endButton.getText().equals("End Time")){
+            AlertDialog.Builder alertDialog1 = new AlertDialog.Builder(BuyActivity.this);
+            alertDialog1.setTitle("You must enter start and end times in order to continue.");
+            alertDialog1.setCancelable(true);
+            AlertDialog alert = alertDialog1.create();
+            alert.setCanceledOnTouchOutside(true);
+            alert.show();
+        } else {
         // Start new Buy Activity
         Intent intent = new Intent(this, BuyListingsActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", getChecked);
+
+        intent.putExtra("timeStart",startButton.getText());
+        Log.i("LoginActivity", "timeStart: " + startButton.getText());
+        intent.putExtra("timeEnd",endButton.getText());
+        Log.i("LoginActivity", "timeEnd: " +endButton.getText());
+
         startActivity(intent);
+        }
     }
-
-
 }
