@@ -1,9 +1,11 @@
 package com.swipeme.www.swipeme;
 
 import android.content.Intent;
+import android.content.pm.PackageInstaller;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +14,14 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
+<<<<<<< HEAD
 import com.facebook.LoginActivity;
+=======
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.model.GraphUser;
+>>>>>>> f3e067c0a5a7ee74e563654582981b6c817a569c
 import com.parse.ParseUser;
 
 import java.lang.reflect.Field;
@@ -26,6 +35,7 @@ public class HomeActivity extends FragmentActivity {
     private static final String[] m_listIds = new String [] {"check_bplate", "check_covel", "check_deneve",
             "check_feast", "check_bcafe", "check_1919", "check_rendez", "check_latenight",
             "check_hedrick" };
+    private String user_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,14 @@ public class HomeActivity extends FragmentActivity {
         } catch (Exception ex) {
             // Ignore
         }
+
+        // Retrieve userID
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            user_ID = extras.getString("userID");
+        }
+        Log.d("HomeActivity", "UserID: " + user_ID);
     }
 
 
@@ -74,8 +92,12 @@ public class HomeActivity extends FragmentActivity {
             logout();
             return true;
         }
-        else if (id == R.id.action_messages){
+        else if (id == R.id.action_messages) {
             Intent intent = new Intent(this, ChatActivity.class);
+        }
+        else if (id == R.id.action_listings) {
+            Intent intent = new Intent(this, MyListingsActivity.class);
+            intent.putExtra("userID", user_ID);
             startActivity(intent);
         }
 
@@ -145,6 +167,11 @@ public class HomeActivity extends FragmentActivity {
         // Start new Sell Activity
         Intent intent = new Intent(this, SellActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", checked);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            intent.putExtra("userID",extras.getString("userID"));
+        }
         startActivity(intent);
     }
 

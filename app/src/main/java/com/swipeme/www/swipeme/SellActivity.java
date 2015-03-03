@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
@@ -14,11 +15,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
+import android.widget.EditText;
+import com.parse.ParseObject;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import android.widget.Toast;
 
 
 public class SellActivity extends FragmentActivity {
@@ -131,5 +134,32 @@ public class SellActivity extends FragmentActivity {
         quantity_spinner = (Spinner) findViewById(R.id.quantity_spinner);
         price_spinner = (Spinner) findViewById(R.id.price_spinner);
         //quantity_spinner.setOnItemClickListener(new CustomOnItemSelectedListener);
+    }
+    public void postOffer(View view)
+    {
+        ParseObject userOffer=new ParseObject("Offers");
+
+        userOffer.put("price",price_spinner.getSelectedItem().toString());
+        Log.i("LoginActivity", "price: " + price_spinner.getSelectedItem().toString());
+        ArrayList<String> getChecked = new ArrayList<String>();
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            getChecked = extras.getStringArrayList("checked_restaurants");
+        }
+        Button endButton = (Button) findViewById(R.id.end_time_button);
+        Button startButton = (Button) findViewById(R.id.start_time_button);
+        userOffer.put("quantity",quantity_spinner.getSelectedItem().toString());
+        Log.i("LoginActivity", "quantity: " + quantity_spinner.getSelectedItem().toString());
+        userOffer.put("timeStart",startButton.getText());
+        Log.i("LoginActivity", "timeStart: " + startButton.getText());
+        userOffer.put("timeEnd",endButton.getText());
+        Log.i("LoginActivity", "timeEnd: " +endButton.getText());
+        userOffer.put("restaurants",getChecked);
+        userOffer.put("userID",extras.getString("userID"));
+        Log.i("LoginActivity", "userID: " + extras.getString("userID"));
+        Toast.makeText(getApplicationContext(),
+                "Offer Successfully Posted!", Toast.LENGTH_LONG).show();
+        userOffer.saveInBackground();
     }
 }
