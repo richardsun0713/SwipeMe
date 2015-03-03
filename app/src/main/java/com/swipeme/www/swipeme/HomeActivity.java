@@ -163,6 +163,11 @@ public class HomeActivity extends FragmentActivity {
         // Start new Sell Activity
         Intent intent = new Intent(this, SellActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", checked);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            intent.putExtra("userID",extras.getString("userID"));
+        }
         startActivity(intent);
     }
 
