@@ -54,7 +54,7 @@
         <activity
             android:name=".BuyListingsActivity"
             android:label="@string/title_activity_buy_listings"
-            android:parentActivityName=".BuyActivity">
+            android:parentActivityName=".HomeActivity">
         </activity>
         <activity
             android:name=".ChatActivity"
