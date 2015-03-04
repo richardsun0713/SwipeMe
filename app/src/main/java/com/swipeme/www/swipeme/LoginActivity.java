@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -31,6 +33,10 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        Typeface typeface = Typeface.createFromAsset(getAssets(),
+                "fonts/LobsterTwo-Bold.otf");
+        ((TextView) findViewById(R.id.SwipeMeLogoText)).setTypeface(typeface);
+
         // Check if there is a currently logged in user
         // and it's linked to a Facebook account.
         ParseUser currentUser = ParseUser.getCurrentUser();

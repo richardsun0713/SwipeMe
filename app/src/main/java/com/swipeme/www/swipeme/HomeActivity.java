@@ -1,10 +1,15 @@
 package com.swipeme.www.swipeme;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import com.swipeme.www.swipeme.TypefaceSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ToggleButton;
 
 
@@ -42,6 +48,16 @@ public class HomeActivity extends FragmentActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        // Set Action Bar font
+
+        SpannableString s = new SpannableString("SwipeMe");
+        s.setSpan(new TypefaceSpan(this, "LobsterTwo-Bold.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(s);
 
         //make dropdown show even if phone has menu button
         try {

@@ -10,19 +10,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="75dp"
         android:text="@string/SwipeMeLogoText"
         android:textColor="#FFFFFF"
-        android:textSize="50sp"
-        android:textStyle="bold" />
+        android:textSize="60sp" />
 
     <ImageView
         android:id="@+id/SwipeMeLogo"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/swipemelogo" />
 
     <TextView

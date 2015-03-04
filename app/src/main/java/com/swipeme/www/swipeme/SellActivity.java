@@ -1,9 +1,12 @@
 package com.swipeme.www.swipeme;
 
+import android.app.ActionBar;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.DialogFragment;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,9 +21,12 @@ import android.widget.TimePicker;
 import android.widget.EditText;
 import com.parse.ParseObject;
 import java.lang.reflect.Field;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import android.widget.Toast;
 
 
@@ -32,6 +38,17 @@ public class SellActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
+
+
+        // Set Action Bar font
+
+        SpannableString s = new SpannableString("Sell");
+        s.setSpan(new TypefaceSpan(this, "LobsterTwo-Bold.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(s);
 
         //make dropdown show even if phone has menu button
         try {
