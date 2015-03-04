@@ -1,18 +1,29 @@
 package com.swipeme.www.swipeme;
 
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TimePicker;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class BuyActivity extends FragmentActivity {
+
+    ArrayList<String> getChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +43,12 @@ public class BuyActivity extends FragmentActivity {
         }
 
         // Get checked values from HomeActivity
-        ArrayList<String> getChecked = new ArrayList<>();
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
             getChecked = extras.getStringArrayList("checked_restaurants");
         }
+
 
         // Display checked values in ListView
         /* TODO: make display better looking, display appropriate information dependent on which
@@ -51,7 +62,6 @@ public class BuyActivity extends FragmentActivity {
         );
         lv.setAdapter(arrayAdapter);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,5 +83,80 @@ public class BuyActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+    }
+
+
+    public void showStartTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Button startButton = (Button) findViewById(R.id.start_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    startButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+
+    }
+
+    public void showEndTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Button endButton = (Button) findViewById(R.id.end_time_button);
+                try {
+                    String _24HourTime = "" + hourOfDay + ":" + minute;
+                    SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
+                    Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    endButton.setText(_12HourSDF.format(_24HourDt));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void startBuyListings(View view) {
+        //Check to see if we should enable the search listing button.
+        Button startButton = (Button) findViewById(R.id.start_time_button);
+        Button endButton = (Button) findViewById(R.id.end_time_button);
+        if (startButton.getText().equals("Start Time") || endButton.getText().equals("End Time")){
+            AlertDialog.Builder alertDialog1 = new AlertDialog.Builder(BuyActivity.this);
+            alertDialog1.setTitle("You must enter start and end times in order to continue.");
+            alertDialog1.setCancelable(true);
+            AlertDialog alert = alertDialog1.create();
+            alert.setCanceledOnTouchOutside(true);
+            alert.show();
+        } else {
+        // Start new Buy Activity
+        Intent intent = new Intent(this, BuyListingsActivity.class);
+        intent.putStringArrayListExtra("checked_restaurants", getChecked);
+
+        intent.putExtra("timeStart",startButton.getText());
+        Log.i("LoginActivity", "timeStart: " + startButton.getText());
+        intent.putExtra("timeEnd",endButton.getText());
+        Log.i("LoginActivity", "timeEnd: " +endButton.getText());
+
+        startActivity(intent);
+        }
     }
 }

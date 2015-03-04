@@ -16,7 +16,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-
+import com.parse.Parse;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +31,6 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
         // Check if there is a currently logged in user
         // and it's linked to a Facebook account.
         ParseUser currentUser = ParseUser.getCurrentUser();

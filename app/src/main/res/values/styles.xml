@@ -5,8 +5,98 @@
         <item name="android:actionBarStyle">@style/AppActionBar</item>
     </style>
 
-    <style name="AppActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@drawable/bluebar</item>
+    <style name="AppActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#14b9d6</item>
+    </style>
+
+
+
+    <style name="BruinCafe" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_bruincafe</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleBruinCafe"  parent="android:Theme.Black">
+        <item name="android:buttonStyleToggle">@style/BruinCafe</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="BruinPlate" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_bruinplate</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleBruinPlate"  parent="android:Theme.Black">
+        <item name="android:buttonStyleToggle">@style/BruinPlate</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="Cafe1919" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_cafe1919</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleCafe1919"  parent="android:Theme.Black">
+        <item name="android:buttonStyleToggle">@style/Cafe1919</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="Covel" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_covel</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleCovel"  parent="android:Theme.Black">
+        <item name="android:buttonStyleToggle">@style/Covel</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="DeNeve" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_deneve</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleDeNeve"  parent="android:Theme.Black">
+        <item name="android:buttonStyleToggle">@style/DeNeve</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="Feast" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_feast</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleFeast"  parent="android:Theme.Black">
+        <item name="android:buttonStyleToggle">@style/Feast</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="LateNight" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_latenight</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleLateNight"  parent="android:Theme.Black">
+        <item name="android:buttonStyleToggle">@style/LateNight</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="Rendezvous" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_rendezvous</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleRendezvous"  parent="android:Theme.Black">
+        <item name="android:buttonStyleToggle">@style/Rendezvous</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
     </style>
 
 </resources>
