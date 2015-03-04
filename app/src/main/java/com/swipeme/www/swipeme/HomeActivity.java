@@ -84,7 +84,7 @@ public class HomeActivity extends FragmentActivity {
             return true;
         }
         else if (id == R.id.action_messages) {
-            Intent intent = new Intent(this, ChatActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ListUsersActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.action_listings) {
@@ -184,6 +184,8 @@ public class HomeActivity extends FragmentActivity {
     }
 
     private void logout() {
+        // Stop Messaging Service
+        stopService(new Intent(this, MessageService.class));
         // Log the user out
         ParseUser.logOut();
         // Go to the login view
