@@ -86,11 +86,8 @@
         <item>$10.00</item>
     </string-array>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_my_listings">MyListingsActivity</string>
-
-    <string name="hello_world">Hello world!</string>
-
+    <!-- My Listings -->
+    <string name="title_activity_my_listings">My Listings</string>
 
     <!-- Buy Listings Values -->
     <string name="title_activity_buy_listings">BuyListingsActivity</string>
