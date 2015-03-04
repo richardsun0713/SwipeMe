@@ -1,9 +1,13 @@
 package com.swipeme.www.swipeme;
 
+import android.app.ActionBar;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.DialogFragment;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,20 +22,35 @@ import android.widget.TimePicker;
 import android.widget.EditText;
 import com.parse.ParseObject;
 import java.lang.reflect.Field;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import android.widget.Toast;
 
 
 public class SellActivity extends FragmentActivity {
 
     private Spinner quantity_spinner, price_spinner;
+    private String user_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
+
+
+        // Set Action Bar font
+
+        SpannableString s = new SpannableString("Sell");
+        s.setSpan(new TypefaceSpan(this, "LobsterTwo-Bold.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(s);
 
         //make dropdown show even if phone has menu button
         try {
@@ -66,6 +85,13 @@ public class SellActivity extends FragmentActivity {
         lv.setAdapter(arrayAdapter);
 
         addListenerOnSpinnerItemSelection();
+
+        // Retrieve userID
+        if(extras != null)
+        {
+            user_ID = extras.getString("userID");
+        }
+        Log.d("HomeActivity", "UserID: " + user_ID);
     }
 
 
@@ -151,15 +177,43 @@ public class SellActivity extends FragmentActivity {
         Button startButton = (Button) findViewById(R.id.start_time_button);
         userOffer.put("quantity",quantity_spinner.getSelectedItem().toString());
         Log.i("LoginActivity", "quantity: " + quantity_spinner.getSelectedItem().toString());
+
+        //Adjust timeStart and timeEnd into Date format for simpler comparing later on
+        /*
+        String timeStart = startButton.getText().toString();
+        String timeEnd = endButton.getText().toString();
+        Date timeStartDate = null;
+        Date timeEndDate = null;
+
+        try {
+            timeStartDate = new SimpleDateFormat("hh:mm a").parse(timeStart);
+            timeEndDate = new SimpleDateFormat("hh:mm a").parse(timeEnd);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
         userOffer.put("timeStart",startButton.getText());
         Log.i("LoginActivity", "timeStart: " + startButton.getText());
         userOffer.put("timeEnd",endButton.getText());
         Log.i("LoginActivity", "timeEnd: " +endButton.getText());
+
+        /*
+        userOffer.put("timeStartDate",timeStartDate);
+        Log.i("LoginActivity", "timeStart: " + timeStartDate);
+        userOffer.put("timeEndDate",timeEndDate);
+        Log.i("LoginActivity", "timeEnd: " + timeEndDate);*/
+
+
         userOffer.put("restaurants",getChecked);
-        userOffer.put("userID",extras.getString("userID"));
-        Log.i("LoginActivity", "userID: " + extras.getString("userID"));
+        userOffer.put("userID", user_ID);
+        Log.i("LoginActivity", "userID: " + user_ID);
         Toast.makeText(getApplicationContext(),
                 "Offer Successfully Posted!", Toast.LENGTH_LONG).show();
         userOffer.saveInBackground();
+
+        // Start MyListingActivity
+        Intent intent = new Intent(this, MyListingsActivity.class);
+        intent.putExtra("userID", user_ID);
+        finish();
+        startActivity(intent);
     }
 }

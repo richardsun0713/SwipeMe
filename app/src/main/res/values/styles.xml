@@ -7,9 +7,20 @@
 
     <style name="AppActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">#14b9d6</item>
+        <item name="android:titleTextStyle">@style/AppActionBar.titleTextColor</item>
     </style>
 
+    <style name="AppActionBar.titleTextColor" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 
+    <!-- Custom Button Fonts -->
+
+    <style name="button" parent="@android:style/Widget.Button">
+        <item name="com.swipeme.www.swipeme:font">fonts/BIG JOHN.otf</item>
+    </style>
+
+    <!-- Image Buttons -->
 
     <style name="BruinCafe" parent="android:Widget">
         <item name="android:background">@drawable/ic_toggle_bg_bruincafe</item>
