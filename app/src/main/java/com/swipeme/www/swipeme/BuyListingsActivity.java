@@ -10,15 +10,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 
 import org.w3c.dom.Text;
 
@@ -66,38 +70,53 @@ public class BuyListingsActivity extends FragmentActivity {
             timeEnd = extras.getString("timeEnd");
         }
 
-        //Retrieve Parse objects with a Parse query
-        ParseQuery<ParseObject> query = new ParseQuery("Offers");
-        query.addDescendingOrder("price");
-        query.whereContainedIn("restaurants", getChecked);
-        //query.whereGreaterThanOrEqualTo("timeStart", timeEnd);
-        //query.whereLessThanOrEqualTo("timeEnd", timeStart);
 
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> matchedList, com.parse.ParseException e) {
-
-                for (ParseObject object : matchedList){
-                    matched.add((String) object.get("userID") + ". " + (String) object.get("price") + ". " + (String) object.get("quantity"));
-                }
-
-                if (e == null) {
-                    Log.i("BuyListings", "Retrieved " + matchedList.size() + " matches");
-                    updateList();
-                } else {
-                    Log.i("BuyListings", "Error: " + e.getMessage());
-                }
-            }
-        });
+        displayList();
     }
 
-    public void updateList(){
-        ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                matched
-        );
-        lv.setAdapter(arrayAdapter);
+    private void displayList() {
+        // Pass the factory into the ParseQueryAdapter's constructor.
+        final ParseQueryAdapter adapter = new BuyListingAdapter(this, timeStart, timeEnd, getChecked);
+        adapter.setTextKey("name");
+
+        // Set a callback to be fired upon successful loading of a new set of ParseObjects.
+        adapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<ParseObject>() {
+            public void onLoading() {
+                // Trigger any "loading" UI
+                createProgressBar();
+            }
+
+            public void onLoaded(java.util.List<ParseObject> list, java.lang.Exception e) {
+                // Execute any post-loading logic, hide "loading" UI
+                Log.i("BuyListingsActivity", "Retrieved " + list.size() + " listings");
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        // Attach to listView
+        ListView listView = (ListView) findViewById(R.id.listview);
+        listView.setAdapter(adapter);
+    }
+
+    private void createProgressBar() {
+        // Create a progress bar to display while the list loads
+        RelativeLayout layout = new RelativeLayout(this);
+        ProgressBar progressBar = new ProgressBar(this);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.VISIBLE);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        layout.addView(progressBar,params);
+
+        getListView().setEmptyView(progressBar);
+
+        // Must add the progress bar to the root of the layout
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.addView(layout);
+    }
+
+    private ListView getListView() {
+        return (ListView) findViewById(R.id.listview);
     }
 
 

@@ -177,10 +177,32 @@ public class SellActivity extends FragmentActivity {
         Button startButton = (Button) findViewById(R.id.start_time_button);
         userOffer.put("quantity",quantity_spinner.getSelectedItem().toString());
         Log.i("LoginActivity", "quantity: " + quantity_spinner.getSelectedItem().toString());
+
+        //Adjust timeStart and timeEnd into Date format for simpler comparing later on
+        /*
+        String timeStart = startButton.getText().toString();
+        String timeEnd = endButton.getText().toString();
+        Date timeStartDate = null;
+        Date timeEndDate = null;
+
+        try {
+            timeStartDate = new SimpleDateFormat("hh:mm a").parse(timeStart);
+            timeEndDate = new SimpleDateFormat("hh:mm a").parse(timeEnd);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
         userOffer.put("timeStart",startButton.getText());
         Log.i("LoginActivity", "timeStart: " + startButton.getText());
         userOffer.put("timeEnd",endButton.getText());
         Log.i("LoginActivity", "timeEnd: " +endButton.getText());
+
+        /*
+        userOffer.put("timeStartDate",timeStartDate);
+        Log.i("LoginActivity", "timeStart: " + timeStartDate);
+        userOffer.put("timeEndDate",timeEndDate);
+        Log.i("LoginActivity", "timeEnd: " + timeEndDate);*/
+
+
         userOffer.put("restaurants",getChecked);
         userOffer.put("userID", user_ID);
         Log.i("LoginActivity", "userID: " + user_ID);
