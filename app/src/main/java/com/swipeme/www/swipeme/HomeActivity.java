@@ -12,7 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.ToggleButton;
+
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -26,11 +27,10 @@ import java.util.ArrayList;
 
 public class HomeActivity extends FragmentActivity {
 
-    private static final String[] m_restaurantNames = new String[] {"Bruin Plate", "Covel", "De Neve", "Feast",
-            "Bruin Cafe", "Cafe 1919", "Rendevous", "De Neve Late Night", "Hedrick Late Night"};
-    private static final String[] m_listIds = new String [] {"check_bplate", "check_covel", "check_deneve",
-            "check_feast", "check_bcafe", "check_1919", "check_rendez", "check_latenight",
-            "check_hedrick" };
+    private static final String[] m_restaurantNames = new String[] {"Bruin Plate", "Feast", "Covel", "De Neve",
+            "Bruin Cafe", "Cafe 1919", "De Neve Late Night", "Rendezvous"};
+    private static final String[] m_listIds = new String [] {"bplateButton", "feastButton", "covelButton",
+            "deneveButton", "bruincafeButton", "cafe1919Button", "latenightButton", "rendezvousButton"};
     private String user_ID;
 
     @Override
@@ -135,7 +135,7 @@ public class HomeActivity extends FragmentActivity {
         // Get checkbox data
         ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < m_listIds.length; i++) {
-            CheckBox cb = (CheckBox) findViewById(getResources().getIdentifier(
+            ToggleButton cb = (ToggleButton) findViewById(getResources().getIdentifier(
                     m_listIds[i], "id", getPackageName()));
             if (cb.isChecked()) {
                 checked.add(m_restaurantNames[i]);
@@ -153,7 +153,7 @@ public class HomeActivity extends FragmentActivity {
         // Get checkbox data
         ArrayList<String> checked = new ArrayList<>();
         for (int i = 0; i < m_listIds.length; i++) {
-            CheckBox cb = (CheckBox) findViewById(getResources().getIdentifier(
+            ToggleButton cb = (ToggleButton) findViewById(getResources().getIdentifier(
                     m_listIds[i], "id", getPackageName()));
             if (cb.isChecked()) {
                 checked.add(m_restaurantNames[i]);
@@ -163,6 +163,7 @@ public class HomeActivity extends FragmentActivity {
         // Start new Sell Activity
         Intent intent = new Intent(this, SellActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", checked);
+
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {

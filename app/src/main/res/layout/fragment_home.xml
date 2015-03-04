@@ -6,16 +6,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.swipeme.www.swipeme.HomeActivity$PlaceholderFragment"
-    android:background="@drawable/blue">
+    android:background="@drawable/blue"
+    android:id="@+id/big_layout">
+
+
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/check_halls">
+        android:id="@+id/check_halls"
+        android:layout_alignLeft="@+id/page_buttons"
+        android:layout_alignStart="@+id/page_buttons">
+
+
+
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/checkboxList">
 
             <!--<TextView-->
@@ -34,7 +43,7 @@
                 <!--android:gravity="center"-->
                 <!--android:layout_weight="0.2"-->
                 <!--/>-->
-
+<!--
             <CheckBox
                 android:id="@+id/check_bplate"
                 android:layout_width="match_parent"
@@ -131,9 +140,85 @@
                 android:layout_weight="0.09"
                 android:textSize="25sp"
                 />
+-->
+          <ToggleButton
+             android:layout_width="fill_parent"
+             android:layout_height="120dp"
+             android:id="@+id/bplateButton"
+             android:background="@drawable/ic_toggle_bg_bruinplate"
+             android:adjustViewBounds="true"
+             android:scaleType="fitXY"
+              style="@style/toggleBruinPlate"/>
+
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:id="@+id/feastButton"
+                android:background="@drawable/ic_toggle_bg_feast"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                style="@style/toggleFeast"/>
+
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:id="@+id/covelButton"
+                android:background="@drawable/ic_toggle_bg_covel"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                style="@style/toggleCovel" />
+
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:id="@+id/deneveButton"
+                android:background="@drawable/ic_toggle_bg_deneve"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                style="@style/toggleDeNeve" />
+
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:id="@+id/bruincafeButton"
+                android:background="@drawable/ic_toggle_bg_bruincafe"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                style="@style/toggleBruinCafe"/>
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:id="@+id/cafe1919Button"
+                android:background="@drawable/ic_toggle_bg_cafe1919"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                style="@style/toggleCafe1919"/>
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:id="@+id/latenightButton"
+                android:background="@drawable/ic_toggle_bg_latenight"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                style="@style/toggleLateNight"/>
+
+            <ToggleButton
+                android:layout_width="fill_parent"
+                android:layout_height="120dp"
+                android:id="@+id/rendezvousButton"
+                android:background="@drawable/ic_toggle_bg_rendezvous"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                style="@style/toggleRendezvous"/>
+            
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="47.5dp" />
 
         </LinearLayout>
     </ScrollView>
+
+
 
     <LinearLayout
         android:id="@+id/page_buttons"
@@ -149,9 +234,9 @@
             android:id="@+id/button_buy"
             android:background="@drawable/custom_button"
             android:layout_weight="1"
-            android:textSize="30sp"
+            android:textSize="19sp"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
+            android:textStyle="normal"
             android:fontFamily="sans-serif-medium"
             android:onClick="startBuyActivity"/>
 
@@ -162,13 +247,12 @@
             android:id="@+id/button_sell"
             android:background="@drawable/custom_button"
             android:layout_weight="1"
-            android:textSize="30sp"
+            android:textSize="19sp"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
+            android:textStyle="normal"
             android:fontFamily="sans-serif-medium"
             android:onClick="startSellActivity"/>
     </LinearLayout>
-
 
 
 </RelativeLayout>
