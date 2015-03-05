@@ -1,18 +1,27 @@
 package com.swipeme.www.swipeme;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.lang.reflect.Field;
@@ -24,11 +33,22 @@ import java.util.Date;
 public class BuyActivity extends FragmentActivity {
 
     ArrayList<String> getChecked;
+    CustomListAdapter myadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
+
+        // Set Action Bar font
+
+        SpannableString s = new SpannableString("Buy");
+        s.setSpan(new TypefaceSpan(this, "LobsterTwo-Bold.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(s);
 
         //make dropdown show even if phone has menu option
         try {
@@ -55,12 +75,80 @@ public class BuyActivity extends FragmentActivity {
          * boxes were selected
          */
         ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                getChecked
-        );
-        lv.setAdapter(arrayAdapter);
+        myadapter = new CustomListAdapter(this, getChecked);
+        lv.setAdapter(myadapter);
+
+    }
+
+    public class CustomListAdapter extends BaseAdapter {
+
+        public String title[];
+        public String description[];
+        ArrayList<String> arr_calllog_name = new ArrayList<>();
+        public Activity context;
+        // ArrayList<Bitmap> imageId;
+
+        public LayoutInflater inflater;
+
+        public CustomListAdapter(Activity context, ArrayList<String> arr_calllog_name) {
+            super();
+
+            this.context = context;
+            this.arr_calllog_name = arr_calllog_name;
+            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+            return arr_calllog_name.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        public class ViewHolder
+        {
+            // ImageView image;
+            TextView txtName;
+            Button btn;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder;
+            if (convertView == null)
+            {
+                holder = new ViewHolder();
+                convertView = inflater.inflate(R.layout.list_item, null);
+
+                holder.txtName = (TextView) convertView.findViewById(R.id.textView);
+                holder.btn = (Button) convertView.findViewById(R.id.deletebutton);
+                convertView.setTag(holder);
+            }
+            else
+                holder = (ViewHolder)convertView.getTag();
+
+            holder.txtName.setText(arr_calllog_name.get(position));
+
+            holder.btn.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    getChecked.remove(position);
+                    myadapter.notifyDataSetChanged();
+                }
+            });
+
+            return convertView;
+        }
     }
 
     @Override
