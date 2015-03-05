@@ -13,6 +13,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,28 +22,19 @@ import java.util.Date;
 
 public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
 
-    public BuyListingAdapter(Context context, final String timeStart, final String timeEnd, final ArrayList<String> getChecked) {
+    public BuyListingAdapter(Context context, final ArrayList<String> getChecked, final String currentUserId, final Date timeStartDate, final Date timeEndDate) {
         // Use the QueryFactory to construct a PQA that will only show
-        // Todos marked as high-pri
+
+
         super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery create() {
+
                 ParseQuery query = new ParseQuery("Offers");
                 query.addDescendingOrder("price");
                 query.whereContainedIn("restaurants", getChecked);
-                //TODO: Make checks for overlapping intervals
-                /*
-                Date filterTimeStart = null;
-                Date filterTimeEnd = null;
 
-                try {
-                    filterTimeStart = new SimpleDateFormat("hh:mm a").parse(timeStart);
-                    filterTimeEnd = new SimpleDateFormat("hh:mm a").parse(timeEnd);
+                //query.whereNotEqualTo("userID", currentUserId);
 
-                } catch (java.text.ParseException e){
-                    //
-                }
-                query.whereGreaterThanOrEqualTo("timeStart", filterTimeEnd);
-                query.whereLessThanOrEqualTo("timeEnd", filterTimeStart);*/
                 return query;
             }
         });

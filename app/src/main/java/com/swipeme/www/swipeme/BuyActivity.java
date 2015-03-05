@@ -32,7 +32,8 @@ import java.util.Date;
 
 public class BuyActivity extends FragmentActivity {
 
-    ArrayList<String> getChecked;
+    private ArrayList<String> getChecked;
+    private Date timeStartDate, timeEndDate;
     CustomListAdapter myadapter;
 
     @Override
@@ -194,6 +195,7 @@ public class BuyActivity extends FragmentActivity {
                     SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
                     SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
                     Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    timeStartDate = _24HourDt;
                     startButton.setText(_12HourSDF.format(_24HourDt));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -214,6 +216,7 @@ public class BuyActivity extends FragmentActivity {
                     SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
                     SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
                     Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    timeEndDate = _24HourDt;
                     endButton.setText(_12HourSDF.format(_24HourDt));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -239,10 +242,10 @@ public class BuyActivity extends FragmentActivity {
         Intent intent = new Intent(this, BuyListingsActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", getChecked);
 
-        intent.putExtra("timeStart",startButton.getText());
-        Log.i("LoginActivity", "timeStart: " + startButton.getText());
-        intent.putExtra("timeEnd",endButton.getText());
-        Log.i("LoginActivity", "timeEnd: " +endButton.getText());
+        intent.putExtra("timeStart",timeStartDate.getTime());
+        Log.i("LoginActivity", "timeStart: " + timeStartDate);
+        intent.putExtra("timeEnd",timeEndDate.getTime());
+        Log.i("LoginActivity", "timeEnd: " +timeEndDate);
 
         startActivity(intent);
         }
