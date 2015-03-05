@@ -72,12 +72,7 @@ public class HomeActivity extends FragmentActivity {
         }
 
         // Retrieve userID
-        Bundle extras = getIntent().getExtras();
-        if(extras != null)
-        {
-            user_ID = extras.getString("userID");
-        }
-        Log.d("HomeActivity", "UserID: " + user_ID);
+        user_ID = ParseUser.getCurrentUser().getUsername();
     }
 
 
@@ -110,7 +105,6 @@ public class HomeActivity extends FragmentActivity {
         }
         else if (id == R.id.action_listings) {
             Intent intent = new Intent(this, MyListingsActivity.class);
-            intent.putExtra("userID", user_ID);
             startActivity(intent);
         }
 

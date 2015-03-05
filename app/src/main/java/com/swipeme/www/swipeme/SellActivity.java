@@ -26,6 +26,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.EditText;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
+
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -91,11 +93,7 @@ public class SellActivity extends FragmentActivity {
         addListenerOnSpinnerItemSelection();
 
         // Retrieve userID
-        if(extras != null)
-        {
-            user_ID = extras.getString("userID");
-        }
-        Log.d("HomeActivity", "UserID: " + user_ID);
+        user_ID = ParseUser.getCurrentUser().getUsername();
     }
 
     public class CustomListAdapter extends BaseAdapter {
@@ -275,14 +273,13 @@ public class SellActivity extends FragmentActivity {
 
         userOffer.put("restaurants",restaurants);
         userOffer.put("userID", user_ID);
-        Log.i("LoginActivity", "userID: " + user_ID);
+        Log.i("SellActivity", "userID: " + user_ID);
         Toast.makeText(getApplicationContext(),
                 "Offer Successfully Posted!", Toast.LENGTH_LONG).show();
         userOffer.saveInBackground();
 
         // Start MyListingActivity
         Intent intent = new Intent(this, MyListingsActivity.class);
-        intent.putExtra("userID", user_ID);
         finish();
         startActivity(intent);
     }
