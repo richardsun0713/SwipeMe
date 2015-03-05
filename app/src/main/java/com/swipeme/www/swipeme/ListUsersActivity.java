@@ -30,6 +30,7 @@ public class ListUsersActivity extends Activity {
     private ListView usersListView;
     private ProgressDialog progressDialog;
     private BroadcastReceiver receiver = null;
+    private ArrayList<String> fbName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class ListUsersActivity extends Activity {
     private void setConversationsList() {
         currentUserId = ParseUser.getCurrentUser().getObjectId();
         names = new ArrayList<String>();
+        fbName = new ArrayList<String>();
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereNotEqualTo("objectId", currentUserId);
@@ -52,12 +54,13 @@ public class ListUsersActivity extends Activity {
                 if (e == null) {
                     for (int i=0; i<userList.size(); i++) {
                         names.add(userList.get(i).getUsername().toString());
+                        fbName.add(userList.get(i).getString("fbName"));
                     }
 
                     usersListView = (ListView)findViewById(R.id.usersListView);
                     namesArrayAdapter =
                         new ArrayAdapter<String>(getApplicationContext(),
-                            R.layout.user_list_item, names);
+                            R.layout.user_list_item, fbName);
                     usersListView.setAdapter(namesArrayAdapter);
 
                     usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

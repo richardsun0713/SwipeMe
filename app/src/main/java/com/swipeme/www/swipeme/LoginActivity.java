@@ -77,11 +77,11 @@ public class LoginActivity extends Activity {
                     Log.d(TAG, "Uh oh. The user cancelled the Facebook login.");
                 } else if (user.isNew()) {
                     Log.d(TAG, "User signed up and logged in through Facebook!");
-                    //makeMeRequest();
+                    makeMeRequest();
                     showHomeActivity();
                 } else {
                     Log.d(TAG, "User logged in through Facebook!");
-                    //makeMeRequest();
+                    makeMeRequest();
                     showHomeActivity();
                 }
             }
