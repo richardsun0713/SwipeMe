@@ -1,7 +1,9 @@
 package com.swipeme.www.swipeme;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,11 +11,14 @@ import android.support.v4.app.DialogFragment;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -35,6 +40,10 @@ public class SellActivity extends FragmentActivity {
 
     private Spinner quantity_spinner, price_spinner;
     private String user_ID;
+
+    ListView lv;
+    public ArrayList<String> restaurants = new ArrayList<>();
+    CustomListAdapter myadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,16 +82,11 @@ public class SellActivity extends FragmentActivity {
         }
 
         // Display checked values in ListView
-        /* TODO: make display better looking, display appropriate information dependent on which
-         * boxes were selected
-         */
-        ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                getChecked
-        );
-        lv.setAdapter(arrayAdapter);
+
+        lv = (ListView) findViewById(R.id.list);
+        restaurants = new ArrayList<>(getChecked);
+        myadapter = new CustomListAdapter(this, restaurants);
+        lv.setAdapter(myadapter);
 
         addListenerOnSpinnerItemSelection();
 
@@ -92,6 +96,77 @@ public class SellActivity extends FragmentActivity {
             user_ID = extras.getString("userID");
         }
         Log.d("HomeActivity", "UserID: " + user_ID);
+    }
+
+    public class CustomListAdapter extends BaseAdapter {
+
+        public String title[];
+        public String description[];
+        ArrayList<String> arr_calllog_name = new ArrayList<>();
+        public Activity context;
+        // ArrayList<Bitmap> imageId;
+
+        public LayoutInflater inflater;
+
+        public CustomListAdapter(Activity context, ArrayList<String> arr_calllog_name) {
+            super();
+
+            this.context = context;
+            this.arr_calllog_name = arr_calllog_name;
+            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+            return arr_calllog_name.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        public class ViewHolder
+        {
+            // ImageView image;
+            TextView txtName;
+            Button btn;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder;
+            if (convertView == null)
+            {
+                holder = new ViewHolder();
+                convertView = inflater.inflate(R.layout.list_item, null);
+
+                holder.txtName = (TextView) convertView.findViewById(R.id.textView);
+                holder.btn = (Button) convertView.findViewById(R.id.deletebutton);
+                convertView.setTag(holder);
+            }
+            else
+                holder = (ViewHolder)convertView.getTag();
+
+            holder.txtName.setText(arr_calllog_name.get(position));
+
+            holder.btn.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    restaurants.remove(position);
+                    myadapter.notifyDataSetChanged();
+                }
+            });
+
+            return convertView;
+        }
     }
 
 
@@ -165,14 +240,9 @@ public class SellActivity extends FragmentActivity {
     {
         ParseObject userOffer=new ParseObject("Offers");
 
-        userOffer.put("price",price_spinner.getSelectedItem().toString());
+        userOffer.put("price", price_spinner.getSelectedItem().toString());
         Log.i("LoginActivity", "price: " + price_spinner.getSelectedItem().toString());
-        ArrayList<String> getChecked = new ArrayList<String>();
-        Bundle extras = getIntent().getExtras();
-        if(extras != null)
-        {
-            getChecked = extras.getStringArrayList("checked_restaurants");
-        }
+
         Button endButton = (Button) findViewById(R.id.end_time_button);
         Button startButton = (Button) findViewById(R.id.start_time_button);
         userOffer.put("quantity",quantity_spinner.getSelectedItem().toString());
@@ -203,7 +273,7 @@ public class SellActivity extends FragmentActivity {
         Log.i("LoginActivity", "timeEnd: " + timeEndDate);*/
 
 
-        userOffer.put("restaurants",getChecked);
+        userOffer.put("restaurants",restaurants);
         userOffer.put("userID", user_ID);
         Log.i("LoginActivity", "userID: " + user_ID);
         Toast.makeText(getApplicationContext(),
