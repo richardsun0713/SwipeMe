@@ -64,7 +64,7 @@
 
     <!-- Price Spinner Values -->
     <string-array name="price_array">
-        <item>Select your price...</item>
+        <item>Select your price per swipe...</item>
         <item>$1.00</item>
         <item>$1.50</item>
         <item>$2.00</item>
