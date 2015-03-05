@@ -40,19 +40,19 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
 
         // Add the create time view
         TextView startTimeView = (TextView) v.findViewById(R.id.time);
-        startTimeView.setText(object.getString("timeStart") + " ~ " + object.getString("timeEnd"));
+        startTimeView.setText(object.getString("timeStart") + " - " + object.getString("timeEnd"));
 
         // Add the quantity and price time view
-        TextView endTimeView = (TextView) v.findViewById(R.id.quantity_price);
+        TextView endTimeView = (TextView) v.findViewById(R.id.price);
         endTimeView.setText(
-                object.getString("quantity") + " for " + object.getString("price") + " each");
+                object.getString("price") );
 
         // Add the restaurant view
-        TextView restaurantsView = (TextView) v.findViewById(R.id.restaurants);
-        restaurantsView.setText(object.getList("restaurants").toString());
+        /*TextView restaurantsView = (TextView) v.findViewById(R.id.restaurants);
+        restaurantsView.setText(object.getList("restaurants").toString());*/
 
         // Add button click function
-        Button button = (Button) v.findViewById(R.id.cancel_button);
+        Button button = (Button) v.findViewById(R.id.trash_button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click

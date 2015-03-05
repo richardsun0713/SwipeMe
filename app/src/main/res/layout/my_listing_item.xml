@@ -22,7 +22,6 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$4.20"
             android:textSize="28sp"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
@@ -32,7 +31,6 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4:20AM - 4:20PM"
             android:textSize="15sp"
             android:textColor="#808080"/>
 
