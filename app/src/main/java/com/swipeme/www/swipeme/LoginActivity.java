@@ -108,7 +108,6 @@ public class LoginActivity extends Activity {
         Log.i("LoginActivity", "Attempt to get user id");
         user_ID = ParseUser.getCurrentUser().getUsername();
         Log.i("LoginActivity", "user_ID: " + user_ID);
-        intent.putExtra("userID", user_ID);
         startService(serviceIntent);
         startActivity(intent);
     }

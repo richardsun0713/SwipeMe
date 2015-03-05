@@ -16,6 +16,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -30,11 +31,7 @@ public class MyListingsActivity extends FragmentActivity {
         setContentView(R.layout.activity_my_listings);
 
         // Retrieve userID
-        Bundle extras = getIntent().getExtras();
-        if(extras != null)
-        {
-            user_ID = extras.getString("userID");
-        }
+        user_ID = ParseUser.getCurrentUser().getUsername();
 
         Log.d("MyListingActivity", "UserID: " + user_ID);
 
@@ -66,7 +63,7 @@ public class MyListingsActivity extends FragmentActivity {
 
     private void displayListings() {
         // Pass the factory into the ParseQueryAdapter's constructor.
-        final ParseQueryAdapter adapter = new MyListingAdapter(this, user_ID);
+        final ParseQueryAdapter adapter = new MyListingAdapter(this);
         adapter.setTextKey("name");
 
         // Set a callback to be fired upon successful loading of a new set of ParseObjects.
