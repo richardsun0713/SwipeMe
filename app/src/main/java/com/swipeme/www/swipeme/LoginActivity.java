@@ -12,13 +12,12 @@ import android.widget.TextView;
 
 import com.facebook.Request;
 import com.facebook.Response;
-import com.facebook.Session;
 import com.facebook.model.GraphUser;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.Parse;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,10 +26,15 @@ public class LoginActivity extends Activity {
     private static final String TAG = "SwipeMe";
     private String user_ID;
     private Dialog progressDialog;
+    private Intent intent;
+    private Intent serviceIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        intent = new Intent(this, HomeActivity.class);
+        serviceIntent = new Intent(getApplicationContext(), MessageService.class);
 
         setContentView(R.layout.activity_main);
         Typeface typeface = Typeface.createFromAsset(getAssets(),
@@ -44,6 +48,12 @@ public class LoginActivity extends Activity {
             // Go to the user info activity
             showHomeActivity();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(this, MessageService.class));
+        super.onDestroy();
     }
 
     @Override
@@ -67,22 +77,39 @@ public class LoginActivity extends Activity {
                     Log.d(TAG, "Uh oh. The user cancelled the Facebook login.");
                 } else if (user.isNew()) {
                     Log.d(TAG, "User signed up and logged in through Facebook!");
+                    //makeMeRequest();
                     showHomeActivity();
                 } else {
                     Log.d(TAG, "User logged in through Facebook!");
+                    //makeMeRequest();
                     showHomeActivity();
                 }
             }
         });
     }
 
+    //add facebook name to user object in parse
+    private void makeMeRequest() {
+        Request request = Request.newMeRequest(ParseFacebookUtils.getSession(), new Request.GraphUserCallback() {
+            @Override
+            public void onCompleted(GraphUser user, Response response) {
+                if (user != null) {
+                    ParseUser.getCurrentUser().put("fbName", user.getFirstName());
+                    ParseUser.getCurrentUser().saveInBackground();
+                }
+            }
+        });
+        request.executeAsync();
+    }
+
     private void showHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        // Start sinch service here as well
         // Get user id
         Log.i("LoginActivity", "Attempt to get user id");
         user_ID = ParseUser.getCurrentUser().getUsername();
         Log.i("LoginActivity", "user_ID: " + user_ID);
         intent.putExtra("userID", user_ID);
+        startService(serviceIntent);
         startActivity(intent);
     }
 

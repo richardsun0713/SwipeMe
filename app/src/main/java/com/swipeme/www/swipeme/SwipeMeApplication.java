@@ -3,7 +3,6 @@ package com.swipeme.www.swipeme;
 import android.app.Application;
 
 import com.parse.Parse;
-import com.parse.ParseObject;
 
 public class SwipeMeApplication extends Application {
 
@@ -14,7 +13,6 @@ public class SwipeMeApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // Register your parse models here
-        ParseObject.registerSubclass(Message.class);
         Parse.enableLocalDatastore(this);
 
         Parse.initialize(this, YOUR_APPLICATION_ID, YOUR_CLIENT_KEY);
