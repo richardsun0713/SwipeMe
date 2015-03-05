@@ -13,16 +13,15 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
 public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
 
-    public MyListingAdapter(Context context, final String user_ID) {
-        // Use the QueryFactory to construct a PQA that will only show
-        // Todos marked as high-pri
+    public MyListingAdapter(Context context) {
         super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery create() {
                 ParseQuery query = new ParseQuery("Offers");
-                query.whereEqualTo("userID", user_ID);
+                query.whereEqualTo("userID", ParseUser.getCurrentUser().getUsername());
                 query.orderByAscending("createdAt");
                 return query;
             }
