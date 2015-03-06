@@ -74,7 +74,7 @@ public class BuyListingsActivity extends FragmentActivity {
         }
 
         if (ParseUser.getCurrentUser().getObjectId() != null){
-            currentUserID = ParseUser.getCurrentUser().getObjectId();
+            currentUserID = ParseUser.getCurrentUser().getUsername();
         }
 
 
@@ -95,19 +95,6 @@ public class BuyListingsActivity extends FragmentActivity {
 
             public void onLoaded(java.util.List<ParseObject> list, java.lang.Exception e) {
                 // Execute any post-loading logic, hide "loading" UI
-
-                // Remove time intervals that do not qualify
-                for(Iterator<ParseObject> dateIter = list.listIterator(); dateIter.hasNext();){
-                    ParseObject obj = dateIter.next();
-                    Date objStartDate = obj.getDate("timeStartDate");
-                    Date objEndDate = obj.getDate("timeEndDate");
-                    if ((timeStartDate.getTime() <= objEndDate.getTime()) && (objStartDate.getTime() <= timeEndDate.getTime())){
-                        continue;
-                    } else {
-                        dateIter.remove();
-                    }
-
-                }
 
                 if (list != null) {
                     Log.i("BuyListingsActivity", "Retrieved " + list.size() + " listings");
