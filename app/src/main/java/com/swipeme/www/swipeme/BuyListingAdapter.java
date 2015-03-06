@@ -19,34 +19,29 @@ import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
 
+
+
 private Context context;
-    public BuyListingAdapter(Context context, final String timeStart, final String timeEnd, final ArrayList<String> getChecked) {
+
         // Use the QueryFactory to construct a PQA that will only show
-        // Todos marked as high-pri
+
+    public BuyListingAdapter(Context context, final ArrayList<String> getChecked, final String currentUserId, final Date startDateConstraint, final Date endDateConstraint) {
         super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
             public ParseQuery create() {
+
                 ParseQuery query = new ParseQuery("Offers");
                 query.addDescendingOrder("price");
                 query.whereContainedIn("restaurants", getChecked);
-                //TODO: Make checks for overlapping intervals
-                /*
-                Date filterTimeStart = null;
-                Date filterTimeEnd = null;
+                query.whereGreaterThanOrEqualTo("timeEndDate", startDateConstraint);
+                query.whereLessThanOrEqualTo("timeStartDate", endDateConstraint);
+                query.whereNotEqualTo("userID", currentUserId);
 
-                try {
-                    filterTimeStart = new SimpleDateFormat("hh:mm a").parse(timeStart);
-                    filterTimeEnd = new SimpleDateFormat("hh:mm a").parse(timeEnd);
-
-                } catch (java.text.ParseException e){
-                    //
-                }
-                query.whereGreaterThanOrEqualTo("timeStart", filterTimeEnd);
-                query.whereLessThanOrEqualTo("timeEnd", filterTimeStart);*/
                 return query;
             }
         });
