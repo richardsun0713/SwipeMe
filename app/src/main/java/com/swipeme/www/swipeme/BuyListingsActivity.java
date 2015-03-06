@@ -111,6 +111,9 @@ public class BuyListingsActivity extends FragmentActivity {
 
                 if (list != null) {
                     Log.i("BuyListingsActivity", "Retrieved " + list.size() + " listings");
+                    if (list.size() == 0) {
+                        showNoListings();
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -135,6 +138,23 @@ public class BuyListingsActivity extends FragmentActivity {
 
         // Must add the progress bar to the root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.addView(layout);
+    }
+
+    private void showNoListings() {
+        // Remove progress bar
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.removeAllViews();
+
+        // Display message
+        RelativeLayout layout = new RelativeLayout(this);
+        TextView textview = new TextView(this);
+        textview.setVisibility(View.VISIBLE);
+        textview.setText("There are no current listings that match your query.");
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        layout.addView(textview, params);
         root.addView(layout);
     }
 

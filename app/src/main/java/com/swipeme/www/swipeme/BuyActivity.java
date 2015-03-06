@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -27,7 +26,10 @@ import android.widget.TimePicker;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+
+import static java.lang.Integer.parseInt;
 
 
 public class BuyActivity extends FragmentActivity {
@@ -145,6 +147,10 @@ public class BuyActivity extends FragmentActivity {
                 public void onClick(View v) {
                     getChecked.remove(position);
                     myadapter.notifyDataSetChanged();
+                    if (myadapter.isEmpty()) {
+                        Log.i("BuyActivity", "Checklist is empty");
+                        finish();
+                    }
                 }
             });
 
@@ -183,7 +189,6 @@ public class BuyActivity extends FragmentActivity {
     public void onPause(){
         super.onPause();
     }
-
 
     public void showStartTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment() {
@@ -230,24 +235,50 @@ public class BuyActivity extends FragmentActivity {
         //Check to see if we should enable the search listing button.
         Button startButton = (Button) findViewById(R.id.start_time_button);
         Button endButton = (Button) findViewById(R.id.end_time_button);
-        if (startButton.getText().equals("Start Time") || endButton.getText().equals("End Time")){
-            AlertDialog.Builder alertDialog1 = new AlertDialog.Builder(BuyActivity.this);
-            alertDialog1.setTitle("You must enter start and end times in order to continue.");
-            alertDialog1.setCancelable(true);
-            AlertDialog alert = alertDialog1.create();
-            alert.setCanceledOnTouchOutside(true);
-            alert.show();
-        } else {
-        // Start new Buy Activity
-        Intent intent = new Intent(this, BuyListingsActivity.class);
-        intent.putStringArrayListExtra("checked_restaurants", getChecked);
-
-        intent.putExtra("timeStart",timeStartDate.getTime());
-        Log.i("LoginActivity", "timeStart: " + timeStartDate);
-        intent.putExtra("timeEnd",timeEndDate.getTime());
-        Log.i("LoginActivity", "timeEnd: " +timeEndDate);
-
-        startActivity(intent);
+        String startTimeText = (String) startButton.getText();
+        String endTimeText = (String) endButton.getText();
+        int startTime = timeStringToInt(startTimeText);
+        int endTime = timeStringToInt(endTimeText);
+        Calendar calendar = Calendar.getInstance();
+        int currentTime = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
+        Log.i("BuyActivity", "Current time: " + calendar.get(Calendar.HOUR_OF_DAY) +
+                ":" + calendar.get(Calendar.MINUTE));
+        if (startTimeText.equals("Start Time") || endTimeText.equals("End Time")){
+            startAlertDialog("You must enter start and end times in order to continue.");
+        } else if (startTime >= endTime) {
+            startAlertDialog("The end time must be after the start time.");
+        } else if (currentTime < startTime || currentTime > endTime) {
+            startAlertDialog("The set time period must include current time.");
         }
+        else {
+            // Start new Buy Activity
+            Intent intent = new Intent(this, BuyListingsActivity.class);
+            intent.putStringArrayListExtra("checked_restaurants", getChecked);
+
+            intent.putExtra("timeStart",startButton.getText());
+            Log.i("LoginActivity", "timeStart: " + startButton.getText());
+            intent.putExtra("timeEnd",endButton.getText());
+            Log.i("LoginActivity", "timeEnd: " + endButton.getText());
+
+            startActivity(intent);
+        }
+    }
+
+    private void startAlertDialog(String string) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(BuyActivity.this);
+        builder.setMessage(string);
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private int timeStringToInt(String string) {
+        int hour = parseInt(string.substring(0, 2));
+        int minute = parseInt(string.substring(3, 5));
+        int time = hour * 60 + minute;
+        if (string.substring(6, 8).equals("PM")) {
+            time += 12 * 60;
+        }
+        Log.i("BuyActivity", "Time: " + time);
+        return time;
     }
 }
