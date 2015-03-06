@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
 
-    public BuyListingAdapter(Context context, final ArrayList<String> getChecked, final String currentUserId, final Date timeStartDate, final Date timeEndDate) {
+    public BuyListingAdapter(Context context, final ArrayList<String> getChecked, final String currentUserId, final Date startDateConstraint, final Date endDateConstraint) {
         // Use the QueryFactory to construct a PQA that will only show
 
 
@@ -32,7 +32,8 @@ public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
                 ParseQuery query = new ParseQuery("Offers");
                 query.addDescendingOrder("price");
                 query.whereContainedIn("restaurants", getChecked);
-
+                query.whereGreaterThanOrEqualTo("timeEndDate", startDateConstraint);
+                query.whereLessThanOrEqualTo("timeStartDate", endDateConstraint);
                 //query.whereNotEqualTo("userID", currentUserId);
 
                 return query;
