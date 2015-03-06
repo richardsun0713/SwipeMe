@@ -43,7 +43,6 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$4.20"
             android:textSize="35sp"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
@@ -53,7 +52,6 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4:20AM - 4:20PM"
             android:textColor="#808080"
             android:textSize="20dp"/>
 
@@ -61,7 +59,6 @@
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="420 swipes available"
             android:textColor="#808080"
             android:textSize="20dp"/>
 
@@ -69,11 +66,6 @@
             android:id="@+id/restaurants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="
-    De Neve
-    Covel
-    Cafe 420
-    Rendezvous"
             android:textSize="20dp"
             android:textColor="#0EBFE9"/>
 

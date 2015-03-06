@@ -32,6 +32,13 @@ public class ListUsersActivity extends Activity {
     private BroadcastReceiver receiver = null;
     private ArrayList<String> fbName;
 
+
+    //TODO: set relations so that users are related if they have active messages with each other.
+    //Add yourself into other users' activelyMessaging relation
+    //TODO: only show users that the current user is related to
+    //get a list of all users where you appear in the their activelyMessaging relation
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
