@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -144,6 +145,10 @@ public class BuyActivity extends FragmentActivity {
                 public void onClick(View v) {
                     getChecked.remove(position);
                     myadapter.notifyDataSetChanged();
+                    if (myadapter.isEmpty()) {
+                        Log.i("BuyActivity", "Checklist is empty");
+                        finish();
+                    }
                 }
             });
 
@@ -182,7 +187,6 @@ public class BuyActivity extends FragmentActivity {
     public void onPause(){
         super.onPause();
     }
-
 
     public void showStartTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment() {

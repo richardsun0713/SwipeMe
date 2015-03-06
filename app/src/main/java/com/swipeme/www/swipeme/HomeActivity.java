@@ -1,6 +1,7 @@
 package com.swipeme.www.swipeme;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.graphics.Typeface;
@@ -153,6 +154,15 @@ public class HomeActivity extends FragmentActivity {
             }
         }
 
+        // If no restaurants are checked, show alert dialog
+        if (checked.isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("You must select at least one restaurant to continue.");
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return;
+        }
+
         // Start new Buy Activity
         Intent intent = new Intent(this, BuyActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", checked);
@@ -169,6 +179,15 @@ public class HomeActivity extends FragmentActivity {
             if (cb.isChecked()) {
                 checked.add(m_restaurantNames[i]);
             }
+        }
+
+        // If no restaurants are checked, show alert dialog
+        if (checked.isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("You must select at least one restaurant to continue.");
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return;
         }
 
         // Start new Sell Activity

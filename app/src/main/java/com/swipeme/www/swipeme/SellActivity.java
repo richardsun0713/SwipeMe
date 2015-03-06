@@ -160,6 +160,10 @@ public class SellActivity extends FragmentActivity {
                 public void onClick(View v) {
                     restaurants.remove(position);
                     myadapter.notifyDataSetChanged();
+                    if (myadapter.isEmpty()) {
+                        Log.i("SellActivity", "Checklist is empty");
+                        finish();
+                    }
                 }
             });
 
