@@ -67,6 +67,8 @@ private Context context;
 
         // Info Button
         Button info_button = (Button) v.findViewById(R.id.info_button);
+        // Message Button
+        Button message_button = (Button)v.findViewById(R.id.message_button);
 
         // Add button listener
         info_button.setOnClickListener(new OnClickListener() {
@@ -74,10 +76,8 @@ private Context context;
             @Override
             public void onClick(View v) {
 
-                Log.i("buy listing activity", "click");
-
                 // custom dialog
-                final Dialog dialog = new Dialog(context);
+                final Dialog dialog = new Dialog(context, R.style.Theme_CustomDialog);
                 dialog.setContentView(R.layout.buylisting_dialog);
 
                 // set the custom dialog components
@@ -112,6 +112,17 @@ private Context context;
                 });
 
                 dialog.show();
+            }
+        } );
+
+        message_button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("message button", "click");
+                String recipientUserID = object.getString("userID");
+
+
+
             }
         } );
 
