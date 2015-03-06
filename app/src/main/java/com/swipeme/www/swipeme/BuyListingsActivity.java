@@ -23,6 +23,7 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
 import org.w3c.dom.Text;
 
@@ -32,15 +33,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 
 public class BuyListingsActivity extends FragmentActivity {
 
     ArrayList<String> getChecked;
-    String timeStart;
-    String timeEnd;
+    Date timeStartDate;
+    Date timeEndDate;
     ArrayList<String> matched;
+    String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +69,12 @@ public class BuyListingsActivity extends FragmentActivity {
         if(extras != null)
         {
             getChecked = extras.getStringArrayList("checked_restaurants");
-            timeStart = extras.getString("timeStart");
-            timeEnd = extras.getString("timeEnd");
+            timeStartDate = new Date(extras.getLong("timeStart"));
+            timeEndDate = new Date(extras.getLong("timeEnd"));
+        }
+
+        if (ParseUser.getCurrentUser().getObjectId() != null){
+            currentUserID = ParseUser.getCurrentUser().getUsername();
         }
 
 
@@ -76,7 +83,7 @@ public class BuyListingsActivity extends FragmentActivity {
 
     private void displayList() {
         // Pass the factory into the ParseQueryAdapter's constructor.
-        final ParseQueryAdapter adapter = new BuyListingAdapter(this, timeStart, timeEnd, getChecked);
+        final ParseQueryAdapter adapter = new BuyListingAdapter(this, getChecked,currentUserID, timeStartDate, timeEndDate);
         adapter.setTextKey("name");
 
         // Set a callback to be fired upon successful loading of a new set of ParseObjects.
@@ -88,7 +95,13 @@ public class BuyListingsActivity extends FragmentActivity {
 
             public void onLoaded(java.util.List<ParseObject> list, java.lang.Exception e) {
                 // Execute any post-loading logic, hide "loading" UI
-                Log.i("BuyListingsActivity", "Retrieved " + list.size() + " listings");
+
+                if (list != null) {
+                    Log.i("BuyListingsActivity", "Retrieved " + list.size() + " listings");
+                    if (list.size() == 0) {
+                        showNoListings();
+                    }
+                }
                 adapter.notifyDataSetChanged();
             }
         });
@@ -112,6 +125,23 @@ public class BuyListingsActivity extends FragmentActivity {
 
         // Must add the progress bar to the root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.addView(layout);
+    }
+
+    private void showNoListings() {
+        // Remove progress bar
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.removeAllViews();
+
+        // Display message
+        RelativeLayout layout = new RelativeLayout(this);
+        TextView textview = new TextView(this);
+        textview.setVisibility(View.VISIBLE);
+        textview.setText("There are no current listings that match your query.");
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        layout.addView(textview, params);
         root.addView(layout);
     }
 

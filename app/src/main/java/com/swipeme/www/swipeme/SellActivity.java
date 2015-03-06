@@ -25,6 +25,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.EditText;
+
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -38,10 +40,13 @@ import java.util.List;
 import android.widget.Toast;
 
 
+
 public class SellActivity extends FragmentActivity {
 
     private Spinner quantity_spinner, price_spinner;
     private String user_ID;
+
+    private Date timeStartDate, timeEndDate;
 
     ListView lv;
     public ArrayList<String> restaurants = new ArrayList<>();
@@ -160,6 +165,10 @@ public class SellActivity extends FragmentActivity {
                 public void onClick(View v) {
                     restaurants.remove(position);
                     myadapter.notifyDataSetChanged();
+                    if (myadapter.isEmpty()) {
+                        Log.i("SellActivity", "Checklist is empty");
+                        finish();
+                    }
                 }
             });
 
@@ -200,6 +209,7 @@ public class SellActivity extends FragmentActivity {
                     SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
                     SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
                     Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    timeStartDate = _24HourDt;
                     startButton.setText(_12HourSDF.format(_24HourDt));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -220,6 +230,7 @@ public class SellActivity extends FragmentActivity {
                     SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
                     SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
                     Date _24HourDt = _24HourSDF.parse(_24HourTime);
+                    timeEndDate = _24HourDt;
                     endButton.setText(_12HourSDF.format(_24HourDt));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -246,29 +257,19 @@ public class SellActivity extends FragmentActivity {
         userOffer.put("quantity",quantity_spinner.getSelectedItem().toString());
         Log.i("LoginActivity", "quantity: " + quantity_spinner.getSelectedItem().toString());
 
-        //Adjust timeStart and timeEnd into Date format for simpler comparing later on
-        /*
-        String timeStart = startButton.getText().toString();
-        String timeEnd = endButton.getText().toString();
-        Date timeStartDate = null;
-        Date timeEndDate = null;
-
-        try {
-            timeStartDate = new SimpleDateFormat("hh:mm a").parse(timeStart);
-            timeEndDate = new SimpleDateFormat("hh:mm a").parse(timeEnd);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
         userOffer.put("timeStart",startButton.getText());
         Log.i("LoginActivity", "timeStart: " + startButton.getText());
         userOffer.put("timeEnd",endButton.getText());
         Log.i("LoginActivity", "timeEnd: " +endButton.getText());
 
-        /*
-        userOffer.put("timeStartDate",timeStartDate);
-        Log.i("LoginActivity", "timeStart: " + timeStartDate);
-        userOffer.put("timeEndDate",timeEndDate);
-        Log.i("LoginActivity", "timeEnd: " + timeEndDate);*/
+        if (timeStartDate != null) {
+            userOffer.put("timeStartDate", timeStartDate);
+            Log.i("LoginActivity", "timeStart: " + timeStartDate);
+        }
+        if (timeEndDate != null) {
+            userOffer.put("timeEndDate", timeEndDate);
+            Log.i("LoginActivity", "timeEnd: " + timeEndDate);
+        }
 
 
         userOffer.put("restaurants",restaurants);
