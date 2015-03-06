@@ -1,22 +1,25 @@
 package com.swipeme.www.swipeme;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
@@ -128,8 +131,31 @@ private Context context;
                 Log.i("message button", "click");
                 String recipientUserID = object.getString("userID");
 
+                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                query.include("activeMessages");
+                query.whereEqualTo("username", recipientUserID);
+                query.findInBackground(new FindCallback<ParseUser>() {
+                    @Override
+                    public void done(List<ParseUser> userList, ParseException e) {
+                        if (e == null) {
+                            String recipientObjectID = userList.get(0).getObjectId();
 
+//                            String currentUserObjectID = ParseUser.getCurrentUser().getObjectId();
+//                            ParseUser recipient = userList.get(0);
+//                            recipient.addUnique("activeMessages", currentUserObjectID);
+//                            Log.i("Messaging", currentUserObjectID);
+//                            recipient.saveInBackground();
+                            ParseUser.getCurrentUser().addUnique("activeMessages", userList.get(0));
+                            ParseUser.getCurrentUser().saveInBackground();
 
+                            Intent intent = new Intent(context, MessagingActivity.class);
+                            intent.putExtra("RECIPIENT_ID", recipientObjectID);
+                            context.startActivity(intent);
+                        } else {
+                                Toast.makeText(context, "Unable to start chat",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         } );
 
