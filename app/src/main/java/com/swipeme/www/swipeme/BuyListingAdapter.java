@@ -1,11 +1,14 @@
 package com.swipeme.www.swipeme;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -89,6 +92,10 @@ private Context context;
 
                 TextView quantity = (TextView) dialog.findViewById(R.id.quantity);
                 quantity.setText(object.getString("quantity") + " swipes available");
+
+                // TODO: implement GraphUser information for name
+                TextView facebookUserName = (TextView) dialog.findViewById(R.id.posted_by);
+                facebookUserName.setText("Posted by: Dummy User");
 
                 ArrayList<Object> list = new ArrayList<>(object.getList("restaurants"));
                 String [] restaurants = list.toArray(new String[list.size()]);

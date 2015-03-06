@@ -1,5 +1,6 @@
 package com.swipeme.www.swipeme;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +16,11 @@ import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+
 public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
+
+    private Context context;
 
     public MyListingAdapter(Context context) {
         super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
@@ -26,6 +31,7 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
                 return query;
             }
         });
+        this.context = context;
     }
 
     // Customize the layout by overriding getItemView
@@ -49,6 +55,60 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
         // Add the restaurant view
         /*TextView restaurantsView = (TextView) v.findViewById(R.id.restaurants);
         restaurantsView.setText(object.getList("restaurants").toString());*/
+
+        // Add info button functionality
+
+        // Info Button
+        Button info_button = (Button) v.findViewById(R.id.info_button);
+
+        // Add button listener
+        info_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                // custom dialog
+                final Dialog dialog = new Dialog(context, R.style.Theme_CustomDialog);
+                dialog.setContentView(R.layout.mylisting_dialog);
+
+                // set the custom dialog components
+                TextView price = (TextView) dialog.findViewById(R.id.price);
+                price.setText(object.getString("price"));
+
+                TextView time = (TextView) dialog.findViewById(R.id.time);
+                time.setText(object.getString("timeStart") + " - " + object.getString("timeEnd"));
+
+                TextView quantity = (TextView) dialog.findViewById(R.id.quantity);
+                quantity.setText(object.getString("quantity") + " swipes available");
+
+                // TODO: implement GraphUser information for name
+                TextView facebookUserName = (TextView) dialog.findViewById(R.id.posted_by);
+                facebookUserName.setText("Posted by: Dummy User");
+
+                ArrayList<Object> list = new ArrayList<>(object.getList("restaurants"));
+                String [] restaurants = list.toArray(new String[list.size()]);
+                TextView restaurantsView = (TextView) dialog.findViewById(R.id.restaurants);
+                for (int i = 0; i < restaurants.length; i++)
+                {
+                    if (i == 0)
+                        restaurantsView.setText(restaurants[i] + "\n");
+                    else
+                        restaurantsView.append(restaurants[i] + "\n");
+                }
+
+                // set x button
+                Button dialogButton = (Button) dialog.findViewById(R.id.exit_button);
+                // if button is clicked, close the dialog
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            }
+        } );
 
         // Add button click function
         Button button = (Button) v.findViewById(R.id.trash_button);

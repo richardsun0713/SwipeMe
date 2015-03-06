@@ -20,6 +20,13 @@
         <item name="com.swipeme.www.swipeme:font">fonts/BIG JOHN.otf</item>
     </style>
 
+    <!-- Custom Dialog -->
+
+    <style name="Theme.CustomDialog" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <!-- Image Buttons -->
 
     <style name="BruinCafe" parent="android:Widget">
