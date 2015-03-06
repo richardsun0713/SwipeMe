@@ -31,6 +31,13 @@ public class ListUsersActivity extends Activity {
     private ProgressDialog progressDialog;
     private BroadcastReceiver receiver = null;
 
+
+    //TODO: set relations so that users are related if they have active messages with each other.
+    //Add yourself into other users' activelyMessaging relation
+    //TODO: only show users that the current user is related to
+    //get a list of all users where you appear in the their activelyMessaging relation
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
