@@ -39,7 +39,6 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$4.20"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
@@ -49,7 +48,6 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4:20AM - 4:20PM"
             android:textColor="#808080"
             android:textSize="15sp"/>
 
@@ -57,7 +55,6 @@
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="420 swipes available"
             android:textColor="#808080"
             android:textSize="15sp"/>
 
@@ -65,11 +62,6 @@
             android:id="@+id/restaurants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="
-    De Neve
-    Covel
-    Cafe 420
-    Rendezvous"
             android:textSize="15sp"
             android:textColor="#14b9d6"/>
 
@@ -107,12 +99,12 @@
                 android:gravity="center_vertical">
 
                 <TextView
+                    android:id="@+id/posted_by"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:paddingTop="8dp"
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:text="Posted by Kevin Wu"/>
+                    android:textStyle="bold"/>
             </LinearLayout>
 
         </LinearLayout>
