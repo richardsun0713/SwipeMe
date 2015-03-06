@@ -3,36 +3,32 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d3d3d3">
+    android:background="#14b9d6">
 
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/button_container"
         android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
+        android:paddingLeft="13dp"
         android:paddingRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:gravity="top"
-        android:background="#FFFFFF"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:background="#FFFFFF">
 
         <LinearLayout
             android:id="@+id/exit_button_container"
             android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:gravity="right">
+            android:layout_height="40dp"
+            android:gravity="end">
             <Button
                 android:id="@+id/exit_button"
-                android:layout_height="35dp"
-                android:layout_width="35dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="0dp"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
                 android:layout_marginTop="4dp"
                 android:focusable="false"
                 android:background="@drawable/close"
@@ -44,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$4.20"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="5dp"/>
@@ -55,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="4:20AM - 4:20PM"
             android:textColor="#808080"
-            android:textSize="20dp"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/quantity"
@@ -63,7 +59,7 @@
             android:layout_height="wrap_content"
             android:text="420 swipes available"
             android:textColor="#808080"
-            android:textSize="20dp"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/restaurants"
@@ -74,10 +70,53 @@
     Covel
     Cafe 420
     Rendezvous"
-            android:textSize="20dp"
-            android:textColor="#0EBFE9"/>
+            android:textSize="15sp"
+            android:textColor="#14b9d6"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="vertical"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/posted_by_container">
+
+                <Button
+                    android:id="@+id/fork_icon"
+                    android:layout_height="29dp"
+                    android:layout_width="29dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:focusable="false"
+                    android:background="@drawable/fork"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/posted_by_container"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:paddingTop="8dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:text="Posted by Kevin Wu"/>
+            </LinearLayout>
+
+         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>
