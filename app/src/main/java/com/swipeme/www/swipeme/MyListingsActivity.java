@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -76,6 +77,9 @@ public class MyListingsActivity extends FragmentActivity {
             public void onLoaded(java.util.List<ParseObject> list, java.lang.Exception e) {
                 // Execute any post-loading logic, hide "loading" UI
                 Log.i("MyListingsActivity", "Retrieved " + list.size() + " listings");
+                if (list.size() == 0) {
+                    showNoListings();
+                }
                 adapter.notifyDataSetChanged();
             }
         });
@@ -99,6 +103,23 @@ public class MyListingsActivity extends FragmentActivity {
 
         // Must add the progress bar to the root of the layout
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.addView(layout);
+    }
+
+    private void showNoListings() {
+        // Remove progress bar
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.removeAllViews();
+
+        // Display message
+        RelativeLayout layout = new RelativeLayout(this);
+        TextView textview = new TextView(this);
+        textview.setVisibility(View.VISIBLE);
+        textview.setText("You have no current listings.");
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        layout.addView(textview, params);
         root.addView(layout);
     }
 
