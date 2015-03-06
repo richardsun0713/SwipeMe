@@ -30,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static java.lang.Integer.parseInt;
+
 
 public class BuyActivity extends FragmentActivity {
 
@@ -231,14 +233,16 @@ public class BuyActivity extends FragmentActivity {
         //Check to see if we should enable the search listing button.
         Button startButton = (Button) findViewById(R.id.start_time_button);
         Button endButton = (Button) findViewById(R.id.end_time_button);
-        if (startButton.getText().equals("Start Time") || endButton.getText().equals("End Time")){
-            AlertDialog.Builder alertDialog1 = new AlertDialog.Builder(BuyActivity.this);
-            alertDialog1.setTitle("You must enter start and end times in order to continue.");
-            alertDialog1.setCancelable(true);
-            AlertDialog alert = alertDialog1.create();
-            alert.setCanceledOnTouchOutside(true);
-            alert.show();
-        } else {
+        String startTimeText = (String) startButton.getText();
+        String endTimeText = (String) endButton.getText();
+        int startTime = timeStringToInt(startTimeText);
+        int endTime = timeStringToInt(endTimeText);
+        if (startTimeText.equals("Start Time") || endTimeText.equals("End Time")){
+            startAlertDialog("You must enter start and end times in order to continue.");
+        } else if (startTime >= endTime) {
+            startAlertDialog("The end time must be after the start time.");
+        }
+        else {
         // Start new Buy Activity
         Intent intent = new Intent(this, BuyListingsActivity.class);
         intent.putStringArrayListExtra("checked_restaurants", getChecked);
@@ -250,5 +254,22 @@ public class BuyActivity extends FragmentActivity {
 
         startActivity(intent);
         }
+    }
+
+    private void startAlertDialog(String string) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(BuyActivity.this);
+        builder.setMessage(string);
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private int timeStringToInt(String string) {
+        int hour = parseInt(string.substring(0, 1));
+        int minute = parseInt(string.substring(3, 4));
+        int time = hour * 60 + minute;
+        if (string.substring(6, 7) == "PM") {
+            time += 12 * 60;
+        }
+        return time;
     }
 }
