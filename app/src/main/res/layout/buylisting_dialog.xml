@@ -32,7 +32,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="7dp"/>
+                android:layout_marginTop="4dp"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -111,8 +111,7 @@
                     android:layout_height="40dp"
                     android:paddingTop="8dp"
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:text="Posted by Kevin Wu"/>
+                    android:textStyle="bold"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -125,8 +124,9 @@
 
             <com.swipeme.www.swipeme.ButtonPlus
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
                 android:background="@drawable/custom_button"
+                android:textSize="20dp"
                 android:text="Message"
                 android:textColor="#FFFFFF"
                 style="@style/button"/>
