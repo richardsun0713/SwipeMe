@@ -38,7 +38,7 @@ private Context context;
                 query.whereContainedIn("restaurants", getChecked);
                 query.whereGreaterThanOrEqualTo("timeEndDate", startDateConstraint);
                 query.whereLessThanOrEqualTo("timeStartDate", endDateConstraint);
-                //query.whereNotEqualTo("userID", currentUserId);
+                query.whereNotEqualTo("userID", currentUserId);
 
                 return query;
             }
