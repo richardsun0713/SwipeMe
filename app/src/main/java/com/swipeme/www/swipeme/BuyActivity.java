@@ -26,6 +26,7 @@ import android.widget.TimePicker;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import static java.lang.Integer.parseInt;
@@ -235,10 +236,16 @@ public class BuyActivity extends FragmentActivity {
         String endTimeText = (String) endButton.getText();
         int startTime = timeStringToInt(startTimeText);
         int endTime = timeStringToInt(endTimeText);
+        Calendar calendar = Calendar.getInstance();
+        int currentTime = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
+        Log.i("BuyActivity", "Current time: " + calendar.get(Calendar.HOUR_OF_DAY) +
+                ":" + calendar.get(Calendar.MINUTE));
         if (startTimeText.equals("Start Time") || endTimeText.equals("End Time")){
             startAlertDialog("You must enter start and end times in order to continue.");
         } else if (startTime >= endTime) {
             startAlertDialog("The end time must be after the start time.");
+        } else if (currentTime < startTime || currentTime > endTime) {
+            startAlertDialog("The set time period must include current time.");
         }
         else {
             // Start new Buy Activity
@@ -248,7 +255,7 @@ public class BuyActivity extends FragmentActivity {
             intent.putExtra("timeStart",startButton.getText());
             Log.i("LoginActivity", "timeStart: " + startButton.getText());
             intent.putExtra("timeEnd",endButton.getText());
-            Log.i("LoginActivity", "timeEnd: " +endButton.getText());
+            Log.i("LoginActivity", "timeEnd: " + endButton.getText());
 
             startActivity(intent);
         }
@@ -262,12 +269,17 @@ public class BuyActivity extends FragmentActivity {
     }
 
     private int timeStringToInt(String string) {
-        int hour = parseInt(string.substring(0, 1));
-        int minute = parseInt(string.substring(3, 4));
+        Log.i("BuyActivity", "string: " + string);
+        int hour = parseInt(string.substring(0, 2));
+        Log.i("BuyActivity", "hour: " + hour);
+        int minute = parseInt(string.substring(3, 5));
+        Log.i("BuyActivity", "minute: " + minute);
         int time = hour * 60 + minute;
-        if (string.substring(6, 7).equals("PM")) {
+        Log.i("BuyActivity", "Time before am/pm: " + time);
+        if (string.substring(6, 8).equals("PM")) {
             time += 12 * 60;
         }
+        Log.i("BuyActivity", "Time: " + time);
         return time;
     }
 }
