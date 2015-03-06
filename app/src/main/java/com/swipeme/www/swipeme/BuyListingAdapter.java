@@ -2,30 +2,23 @@ package com.swipeme.www.swipeme;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.View.OnClickListener;
 
-import com.parse.DeleteCallback;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
 
-
+private Context context;
     public BuyListingAdapter(Context context, final String timeStart, final String timeEnd, final ArrayList<String> getChecked) {
         // Use the QueryFactory to construct a PQA that will only show
         // Todos marked as high-pri
@@ -51,6 +44,7 @@ public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
                 return query;
             }
         });
+        this.context = context;
     }
 
     // Customize the layout by overriding getItemView
@@ -80,10 +74,11 @@ public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
             @Override
             public void onClick(View v) {
 
+                Log.i("buy listing activity", "click");
+
                 // custom dialog
-                final Dialog dialog = new Dialog(v.getContext());
+                final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.buylisting_dialog);
-                dialog.setTitle("Listing Information");
 
                 // set the custom dialog components
                 TextView price = (TextView) dialog.findViewById(R.id.price);
@@ -116,6 +111,7 @@ public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
                     }
                 });
 
+                dialog.show();
             }
         } );
 
