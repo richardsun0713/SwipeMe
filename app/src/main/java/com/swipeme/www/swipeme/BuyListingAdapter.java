@@ -81,7 +81,7 @@ public class BuyListingAdapter extends ParseQueryAdapter<ParseObject> {
             public void onClick(View v) {
 
                 // custom dialog
-                final Dialog dialog = new Dialog(getContext());
+                final Dialog dialog = new Dialog(v.getContext());
                 dialog.setContentView(R.layout.buylisting_dialog);
                 dialog.setTitle("Listing Information");
 
