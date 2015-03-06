@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.view.MenuItem;
 import android.view.ViewConfiguration;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -243,16 +241,16 @@ public class BuyActivity extends FragmentActivity {
             startAlertDialog("The end time must be after the start time.");
         }
         else {
-        // Start new Buy Activity
-        Intent intent = new Intent(this, BuyListingsActivity.class);
-        intent.putStringArrayListExtra("checked_restaurants", getChecked);
+            // Start new Buy Activity
+            Intent intent = new Intent(this, BuyListingsActivity.class);
+            intent.putStringArrayListExtra("checked_restaurants", getChecked);
 
-        intent.putExtra("timeStart",startButton.getText());
-        Log.i("LoginActivity", "timeStart: " + startButton.getText());
-        intent.putExtra("timeEnd",endButton.getText());
-        Log.i("LoginActivity", "timeEnd: " +endButton.getText());
+            intent.putExtra("timeStart",startButton.getText());
+            Log.i("LoginActivity", "timeStart: " + startButton.getText());
+            intent.putExtra("timeEnd",endButton.getText());
+            Log.i("LoginActivity", "timeEnd: " +endButton.getText());
 
-        startActivity(intent);
+            startActivity(intent);
         }
     }
 
@@ -267,7 +265,7 @@ public class BuyActivity extends FragmentActivity {
         int hour = parseInt(string.substring(0, 1));
         int minute = parseInt(string.substring(3, 4));
         int time = hour * 60 + minute;
-        if (string.substring(6, 7) == "PM") {
+        if (string.substring(6, 7).equals("PM")) {
             time += 12 * 60;
         }
         return time;
