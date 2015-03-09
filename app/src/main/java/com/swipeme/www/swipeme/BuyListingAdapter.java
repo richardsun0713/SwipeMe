@@ -2,6 +2,9 @@ package com.swipeme.www.swipeme;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.Menu;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +14,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.content.Intent;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import android.app.Activity;
+
 
 import java.util.ArrayList;
 
@@ -76,13 +81,44 @@ private Context context;
 
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                // Get the layout inflater
+                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+
+                // Inflate and set the layout for the dialog
+                // Pass null as the parent view because its going in the dialog layout
+                builder.setView(inflater.inflate(R.layout.buylisting_dialog, null))
+                        // Add action buttons
+                        .setPositiveButton("Message", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                // sign in the user ...
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                Dialog dialog = builder.create();
+                dialog.show();
+
 
                 // custom dialog
-                final Dialog dialog = new Dialog(context, R.style.Theme_CustomDialog);
+                /*final Dialog dialog = new Dialog(context, R.style.Theme_CustomDialog);
                 dialog.setContentView(R.layout.buylisting_dialog);
+
+               //custom alert dialog
+
+
+                //AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+
+                //dialog.setView(R.layout.buylisting_dialog);
+                //dialog.setContentView(R.layout.buylisting_dialog);
 
                 // set the custom dialog components
                 TextView price = (TextView) dialog.findViewById(R.id.price);
+
                 price.setText(object.getString("price"));
 
                 TextView time = (TextView) dialog.findViewById(R.id.time);
@@ -114,9 +150,10 @@ private Context context;
                     public void onClick(View v) {
                         dialog.dismiss();
                     }
-                });
 
-                dialog.show();
+                }); */
+
+                //dialog.show();
             }
         } );
 

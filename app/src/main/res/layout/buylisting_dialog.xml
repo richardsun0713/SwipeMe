@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#14b9d6">
-
-
-    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
         android:paddingLeft="13dp"
         android:paddingRight="10dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginLeft="3dp"
         android:gravity="top"
         android:background="#FFFFFF">
 
@@ -32,8 +20,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:text="$4.20"/>
+                android:layout_marginTop="4dp"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -57,24 +44,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#808080"
-            android:textSize="15sp"
-            android:text="4:20AM - 4:20PM"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#808080"
-            android:textSize="15sp"
-            android:text="420 swipes available"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/restaurants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="#14b9d6"
-            android:text="De Neve\nCovel\nCafe 420\nBruin Plate"/>
+            android:textColor="#14b9d6"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -115,29 +99,26 @@
                     android:layout_height="40dp"
                     android:paddingTop="8dp"
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:text="Posted by Abitchsad Sahaha"/>
+                    android:textStyle="bold"/>
             </LinearLayout>
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_horizontal">
+<!-- </LinearLayout>
 
-            <com.swipeme.www.swipeme.ButtonPlus
-                android:layout_width="fill_parent"
-                android:layout_height="28dp"
-                android:background="@drawable/custom_button"
-                android:textSize="20dp"
-                android:text="Message"
-                android:textColor="#FFFFFF"
-                style="@style/button"/>
-        </LinearLayout>
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="center_horizontal">
 
-    </LinearLayout>
-
+    <com.swipeme.www.swipeme.ButtonPlus
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_button"
+        android:textSize="20dp"
+        android:text="Message"
+        android:textColor="#FFFFFF"
+        style="@style/button"/>
+    </LinearLayout> -->
 </LinearLayout>
-
+</LinearLayout>
