@@ -119,7 +119,7 @@ private Context context;
                 //AlertDialog.Builder dialog = new AlertDialog.Builder(context);
 
                 //dialog.setView(R.layout.buylisting_dialog);
-                //dialog.setContentView(R.layout.buylisting_dialog);
+                //dialog.setContentView(R.layout.buylisting_dialog);*/
 
                 // set the custom dialog components
                 TextView price = (TextView) dialog.findViewById(R.id.price);
@@ -147,7 +147,7 @@ private Context context;
                         restaurantsView.append(restaurants[i] + "\n");
                 }
 
-                // set x button
+               /* // set x button
                 Button dialogButton = (Button) dialog.findViewById(R.id.exit_button);
                 // if button is clicked, close the dialog
                 dialogButton.setOnClickListener(new OnClickListener() {

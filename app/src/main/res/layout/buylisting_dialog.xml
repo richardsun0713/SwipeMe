@@ -22,19 +22,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="4dp"/>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:gravity="end">
-            <Button
-                android:id="@+id/exit_button"
-                android:layout_height="28dp"
-                android:layout_width="28dp"
-                android:layout_marginTop="4dp"
-                android:focusable="false"
-                android:background="@drawable/close"
-                android:layout_gravity="center_vertical"/>
-            </LinearLayout>
         </LinearLayout>
 
 
@@ -103,22 +90,5 @@
             </LinearLayout>
 
 
-<!-- </LinearLayout>
-
-    <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:gravity="center_horizontal">
-
-    <com.swipeme.www.swipeme.ButtonPlus
-        android:layout_width="fill_parent"
-        android:layout_height="35dp"
-        android:background="@drawable/custom_button"
-        android:textSize="20dp"
-        android:text="Message"
-        android:textColor="#FFFFFF"
-        style="@style/button"/>
-    </LinearLayout> -->
 </LinearLayout>
 </LinearLayout>
