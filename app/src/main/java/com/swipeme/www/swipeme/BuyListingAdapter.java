@@ -49,9 +49,9 @@ private Context context;
                 ParseQuery query = new ParseQuery("Offers");
                 query.addDescendingOrder("price");
                 query.whereContainedIn("restaurants", getChecked);
-                query.whereGreaterThanOrEqualTo("timeEndDate", startDateConstraint);
-                query.whereLessThanOrEqualTo("timeStartDate", endDateConstraint);
-                query.whereNotEqualTo("userID", currentUserId);
+                //query.whereGreaterThanOrEqualTo("timeEndDate", startDateConstraint);
+                //query.whereLessThanOrEqualTo("timeStartDate", endDateConstraint);
+                //query.whereNotEqualTo("userID", currentUserId);
 
                 return query;
             }
