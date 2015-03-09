@@ -72,10 +72,10 @@ private Context context;
         Button message_button = (Button)v.findViewById(R.id.message_button);
 
         // Add button listener
-        info_button.setOnClickListener(new OnClickListener() {
+                info_button.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
 
                 // custom dialog
                 final Dialog dialog = new Dialog(context, R.style.Theme_CustomDialog);

@@ -253,25 +253,25 @@ public class SellActivity extends FragmentActivity {
         price_spinner = (Spinner) findViewById(R.id.price_spinner);
         //quantity_spinner.setOnItemClickListener(new CustomOnItemSelectedListener);
     }
-    final int[][] allEnd={{20,21,20,20,2,0,0,0,0},{20,21,21,20,2,0,12,2,0},{20,21,21,20,2,0,12,2,0},{20,21,21,20,2,0,12,2,0},{20,21,21,20,2,0,12,2,0},{20,21,21,20,2,0,12,2,0},{20,21,20,20,2,0,0,0,0}};
-    final int[][] allStart={{10,9,9,11,15,0,0,21,0},{7,11,7,11,7,11,7,21,7},{7,11,7,11,7,11,7,21,7},{7,11,7,11,7,11,7,21,7},{7,11,7,11,7,11,7,21,7},{7,11,7,11,7,11,7,21,7},{10,9,9,11,15,0,0,21,0}};
+    /*final int[][] allEnd={{17,18,17,17,23,21,21,21,21},{17,18,18,17,23,21,9,23,21},{17,18,18,17,23,21,9,23,21},{17,18,18,17,23,21,9,23,21},{17,18,18,17,23,21,9,23,21},{17,18,18,17,23,21,9,23,21},{17,18,17,17,23,21,21,21,21}};
+    final int[][] allStart={{7,6,6,8,12,21,21,18,21},{4,8,4,8,4,8,4,18,4},{4,8,4,8,4,8,4,18,4},{4,8,4,8,4,8,4,18,4},{4,8,4,8,4,8,4,18,4},{4,8,4,8,4,8,4,18,4},{7,6,6,8,12,21,21,18,21}};
     final String[] m_restaurantNames = new String[] {"Bruin Plate", "Covel", "De Neve", "Feast",
-            "Bruin Cafe", "Cafe 1919", "Rendezvous", "De Neve Late Night", "Hedrick Late Night"};
+            "Bruin Cafe", "Cafe 1919", "Rendezvous", "De Neve Late Night", "Hedrick Late Night"};*/
     public void postOffer(View view)
     {
         ParseObject userOffer=new ParseObject("Offers");
         Calendar c=Calendar.getInstance();
-        int minutes=c.get(Calendar.MINUTE);
+        /*int minutes=c.get(Calendar.MINUTE);
         int hours=c.get(Calendar.HOUR);
         int day=c.get(Calendar.DAY_OF_WEEK);
         int apm=c.get(Calendar.AM_PM);
 
 
 
-
+        */
         Button endButton = (Button) findViewById(R.id.end_time_button);
         Button startButton = (Button) findViewById(R.id.start_time_button);
-        String start=startButton.getText().toString();
+        /*String start=startButton.getText().toString();
         String end=endButton.getText().toString();
         int startHour=Integer.parseInt(start.substring(0, 2));
         int startMinute= Integer.parseInt(start.substring(3,5));
@@ -300,6 +300,9 @@ public class SellActivity extends FragmentActivity {
         {
             hours+=12;
         }
+        startHour-=3;
+        endHour=-3;
+        hours-=3;
         for(int i=0;i<restaurants.size();i++)
         {
             String hall=restaurants.get(i);
@@ -405,7 +408,7 @@ public class SellActivity extends FragmentActivity {
 
             }
 
-        }
+        }*/
 
         userOffer.put("price", price_spinner.getSelectedItem().toString());
         Log.i("LoginActivity", "price: " + price_spinner.getSelectedItem().toString());
