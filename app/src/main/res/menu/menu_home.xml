@@ -17,15 +17,18 @@
         android:title="@string/action_messages"
         android:orderInCategory="2"
         app:showAsAction="never"/>
+    <item android:id="@+id/action_display_times"
+        android:title="Dining Times"
+        android:orderInCategory="3"/>
 
     <item android:id="@+id/action_notification"
         android:title="@string/action_notifications"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_logout"
         android:title="@string/action_logout"
-        android:orderInCategory="4"
+        android:orderInCategory="5"
         app:showAsAction="never"/>
 
 </menu>

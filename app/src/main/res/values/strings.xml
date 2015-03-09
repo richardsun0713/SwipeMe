@@ -93,5 +93,8 @@
     <!-- Buy Listings Values -->
     <string name="title_activity_buy_listings">BuyListingsActivity</string>
     <string name="buy_search_for_listings">Search for Listings</string>
+    <string name="title_activity_dining_times">DiningTimesActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

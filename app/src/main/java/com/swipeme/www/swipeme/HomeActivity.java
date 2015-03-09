@@ -108,6 +108,11 @@ public class HomeActivity extends FragmentActivity {
             Intent intent = new Intent(this, MyListingsActivity.class);
             startActivity(intent);
         }
+        else if(id == R.id.action_display_times)
+        {
+            Intent intent = new Intent(this, DiningTimesActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

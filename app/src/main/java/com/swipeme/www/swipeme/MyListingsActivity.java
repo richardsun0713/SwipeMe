@@ -1,5 +1,6 @@
 package com.swipeme.www.swipeme;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,7 +59,11 @@ public class MyListingsActivity extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
+        else if(id == R.id.action_display_times)
+        {
+            Intent intent = new Intent(this, DiningTimesActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

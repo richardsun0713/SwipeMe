@@ -176,6 +176,11 @@ public class BuyActivity extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        else if(id == R.id.action_display_times)
+        {
+            Intent intent = new Intent(this, DiningTimesActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -34,6 +34,7 @@ import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -245,15 +246,162 @@ public class SellActivity extends FragmentActivity {
         price_spinner = (Spinner) findViewById(R.id.price_spinner);
         //quantity_spinner.setOnItemClickListener(new CustomOnItemSelectedListener);
     }
+    final int[][] allEnd={{20,21,20,20,2,0,0,0,0},{20,21,21,20,2,0,12,2,0},{20,21,21,20,2,0,12,2,0},{20,21,21,20,2,0,12,2,0},{20,21,21,20,2,0,12,2,0},{20,21,21,20,2,0,12,2,0},{20,21,20,20,2,0,0,0,0}};
+    final int[][] allStart={{10,9,9,11,15,0,0,21,0},{7,11,7,11,7,11,7,21,7},{7,11,7,11,7,11,7,21,7},{7,11,7,11,7,11,7,21,7},{7,11,7,11,7,11,7,21,7},{7,11,7,11,7,11,7,21,7},{10,9,9,11,15,0,0,21,0}};
+    final String[] m_restaurantNames = new String[] {"Bruin Plate", "Covel", "De Neve", "Feast",
+            "Bruin Cafe", "Cafe 1919", "Rendezvous", "De Neve Late Night", "Hedrick Late Night"};
     public void postOffer(View view)
     {
         ParseObject userOffer=new ParseObject("Offers");
+        Calendar c=Calendar.getInstance();
+        int minutes=c.get(Calendar.MINUTE);
+        int hours=c.get(Calendar.HOUR);
+        int day=c.get(Calendar.DAY_OF_WEEK);
+        int apm=c.get(Calendar.AM_PM);
 
-        userOffer.put("price", price_spinner.getSelectedItem().toString());
-        Log.i("LoginActivity", "price: " + price_spinner.getSelectedItem().toString());
+
+
 
         Button endButton = (Button) findViewById(R.id.end_time_button);
         Button startButton = (Button) findViewById(R.id.start_time_button);
+        String start=startButton.getText().toString();
+        String end=endButton.getText().toString();
+        int startHour=Integer.parseInt(start.substring(0, 2));
+        int startMinute= Integer.parseInt(start.substring(3,5));
+        int endHour=Integer.parseInt(end.substring(0, 2));
+        int endMinute= Integer.parseInt(end.substring(3,5));
+        ArrayList<String> correct=new ArrayList<>();
+        ArrayList<String> modifiedStart=new ArrayList<>();
+        ArrayList<String> modifiedEnd=new ArrayList<>();
+        ArrayList<String> deleted=new ArrayList<>();
+        ArrayList<ArrayList<String>> finalOrder = new ArrayList<ArrayList<String>>();
+        ArrayList<Integer> finalStart=new ArrayList<Integer>();
+        ArrayList<Integer> finalEnd=new ArrayList<Integer>();
+        ArrayList<Integer> modifiedStartTimes=new ArrayList<>();
+        ArrayList<Integer> modifiedEndTimes=new ArrayList<>();
+        ArrayList<Integer> correctStartTimes=new ArrayList<>();
+        ArrayList<Integer> correctEndTimes=new ArrayList<>();
+        if(start.charAt(start.length()-2)=='P')
+        {
+            startHour+=12;
+        }
+        if(end.charAt(start.length()-2)=='P')
+        {
+            endHour+=12;
+        }
+        if(apm==Calendar.PM)
+        {
+            hours+=12;
+        }
+        for(int i=0;i<restaurants.size();i++)
+        {
+            String hall=restaurants.get(i);
+            int j=-1;
+            if(hall.equals("Bruin Plate"))
+            {
+                j=0;
+            }
+            else if(hall.equals("Covel"))
+            {
+                j=1;
+            }
+            else if(hall.equals("De Neve"))
+            {
+                j=2;
+            }
+            else if(hall.equals("Feast"))
+            {
+                j=3;
+            }
+            else if(hall.equals("Bruin Cafe"))
+            {
+                j=4;
+            }
+            else if(hall.equals("Cafe 1919"))
+            {
+                j=5;
+            }
+            else if(hall.equals("Rendezvous"))
+            {
+                j=6;
+            }
+            else if(hall.equals("De Neve Late Night"))
+            {
+                j=7;
+            }
+            else if(hall.equals("Hedrick Late Night"))
+            {
+                j=8;
+            }
+            else
+            {
+                j=-1;
+            }
+            if(day==1||day==7)
+            {
+                if(j==6||j==8||j==5)
+                {
+                    deleted.add(hall);
+                    continue;
+                }
+                else
+                {
+                    if(startHour>=allStart[day][j]&&endHour<=allEnd[day][j])
+                    {
+                        correct.add(hall);
+                    }
+                    else if(startHour<=allStart[day][j]&&endHour>=allEnd[day][j])
+                    {
+                        deleted.add(hall);
+                    }
+                    else if(startHour>=allStart[day][j]&&endHour>=allEnd[day][j])
+                    {
+                        modifiedEnd.add(restaurants.get(j));
+                        modifiedEndTimes.add(endHour);
+                    }
+                    else if(startHour<=allStart[day][j]&&endHour<=allEnd[day][j])
+                    {
+                        modifiedStart.add((restaurants.get(j)));
+                        modifiedStartTimes.add(startHour);
+                    }
+                }
+            }
+            else {
+                if(startHour>=allStart[day][j]&&endHour<=allEnd[day][j])
+                {
+                    correct.add(hall);
+                    correctEndTimes.add(endHour);
+                    correctStartTimes.add(startHour);
+                }
+                else if(startHour<=allStart[day][j]&&endHour>=allEnd[day][j])
+                {
+                    deleted.add(hall);
+                }
+                else if(startHour>=allStart[day][j]&&endHour>=allEnd[day][j])
+                {
+                    modifiedEnd.add(restaurants.get(j));
+                    modifiedEndTimes.add(endHour);
+                }
+                else if(startHour<=allStart[day][j]&&endHour<=allEnd[day][j])
+                {
+                    modifiedStart.add((restaurants.get(j)));
+                    modifiedStartTimes.add(startHour);
+                }
+            }
+        }
+        int maxLength=modifiedEnd.size()>modifiedStart.size()?modifiedEnd.size():modifiedStart.size();
+        maxLength=maxLength>correct.size()?maxLength:correct.size();
+        for(int i=0;i<correct.size();i++)
+        {
+            for(int j=0;j<correctEndTimes.size();i++)
+            {
+
+            }
+
+        }
+
+        userOffer.put("price", price_spinner.getSelectedItem().toString());
+        Log.i("LoginActivity", "price: " + price_spinner.getSelectedItem().toString());
         userOffer.put("quantity",quantity_spinner.getSelectedItem().toString());
         Log.i("LoginActivity", "quantity: " + quantity_spinner.getSelectedItem().toString());
 
