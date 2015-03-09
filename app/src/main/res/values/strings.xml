@@ -96,5 +96,6 @@
     <string name="title_activity_dining_times">DiningTimesActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_dining_menu">DiningMenuActivity</string>
 
 </resources>

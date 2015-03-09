@@ -1,7 +1,6 @@
 package com.swipeme.www.swipeme;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.http.SslError;
 import android.support.v4.app.FragmentActivity;
@@ -17,15 +16,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 
-public class DiningTimesActivity extends FragmentActivity {
+public class DiningMenuActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dining_times);
+        setContentView(R.layout.activity_dining_menu);
         WebView webView = (WebView)findViewById(R.id.webView);
-        SpannableString s = new SpannableString("Dining Times");
+        SpannableString s = new SpannableString("Dining Menus");
         s.setSpan(new TypefaceSpan(this, "LobsterTwo-Bold.otf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -36,7 +34,7 @@ public class DiningTimesActivity extends FragmentActivity {
         //webView.loadData("yourCode Html to load on the webView " , "text/html" , "utf-8");
         // you can load an URL
         //webView.setWebViewClient(new MyBrowser());
-        String url="https://secure5.ha.ucla.edu/restauranthours/dining-hall-hours-by-day.cfm";
+        String url="http://menu.ha.ucla.edu/foodpro/default.asp";
 
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -55,17 +53,11 @@ public class DiningTimesActivity extends FragmentActivity {
         webView.loadUrl(url);
     }
 
-    /*private class MyBrowser extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
-    }*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_dining_times, menu);
+        getMenuInflater().inflate(R.menu.menu_dining_menu, menu);
         return true;
     }
 
@@ -80,9 +72,9 @@ public class DiningTimesActivity extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        else if(id == R.id.action_display_menus)
+        else if(id == R.id.action_display_times)
         {
-            startActivity(new Intent(this,DiningMenuActivity.class));
+            startActivity(new Intent(this,DiningTimesActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

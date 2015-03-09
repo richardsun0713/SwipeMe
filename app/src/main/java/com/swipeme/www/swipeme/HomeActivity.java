@@ -113,7 +113,10 @@ public class HomeActivity extends FragmentActivity {
             Intent intent = new Intent(this, DiningTimesActivity.class);
             startActivity(intent);
         }
-
+        else if(id == R.id.action_display_menus)
+        {
+            startActivity(new Intent(this,DiningMenuActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 

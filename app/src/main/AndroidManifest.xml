@@ -83,6 +83,16 @@
         <activity
             android:name=".DiningTimesActivity"
             android:label="@string/title_activity_dining_times" >
+
+            <!--
+                <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.swipeme.www.swipeme.HomeActivity" />
+            -->
+        </activity>
+        <activity
+            android:name=".DiningMenuActivity"
+            android:label="@string/title_activity_dining_menu" >
         </activity>
     </application>
 

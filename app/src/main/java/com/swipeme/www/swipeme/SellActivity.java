@@ -196,7 +196,14 @@ public class SellActivity extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
+        else if(id == R.id.action_display_menus)
+        {
+            startActivity(new Intent(this,DiningMenuActivity.class));
+        }
+        else if(id == R.id.action_display_times)
+        {
+            startActivity(new Intent(this,DiningTimesActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 

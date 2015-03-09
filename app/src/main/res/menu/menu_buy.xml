@@ -7,4 +7,7 @@
     <item android:id="@+id/action_display_times"
         android:title="Dining Times"
         android:orderInCategory="1"/>
+    <item android:id="@+id/action_display_menus"
+        android:title="Dining Menus"
+        android:orderInCategory="3"/>
 </menu>

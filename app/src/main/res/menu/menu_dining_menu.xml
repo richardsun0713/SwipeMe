@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.swipeme.www.swipeme.DiningTimesActivity">
+    tools:context="com.swipeme.www.swipeme.DiningMenuActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_display_menus"
-        android:title="Dining Menus"
+    <item android:id="@+id/action_display_times"
+        android:title="Dining Times"
         android:orderInCategory="3"/>
 </menu>

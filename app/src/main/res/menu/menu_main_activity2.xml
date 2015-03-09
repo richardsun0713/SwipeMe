@@ -4,7 +4,4 @@
     tools:context="com.swipeme.www.swipeme.MainActivity2Activity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/action_display_times"
-        android:title="Dining Times"
-        android:orderInCategory="1"/>
 </menu>
