@@ -1,48 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#14b9d6">
-
-
-    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
         android:paddingLeft="13dp"
         android:paddingRight="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
         android:gravity="top"
         android:background="#FFFFFF">
 
         <LinearLayout
-            android:id="@+id/exit_button_container"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:gravity="end">
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="4dp"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:gravity="end">
             <Button
                 android:id="@+id/exit_button"
-                android:layout_height="30dp"
-                android:layout_width="30dp"
+                android:layout_height="28dp"
+                android:layout_width="28dp"
                 android:layout_marginTop="4dp"
                 android:focusable="false"
                 android:background="@drawable/close"
                 android:layout_gravity="center_vertical"/>
+            </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="5dp"/>
+
 
         <TextView
             android:id="@+id/time"
@@ -79,10 +74,10 @@
 
                 <Button
                     android:id="@+id/fork_icon"
-                    android:layout_height="29dp"
-                    android:layout_width="29dp"
+                    android:layout_height="27dp"
+                    android:layout_width="25dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
                     android:focusable="false"
                     android:background="@drawable/fork"
@@ -107,8 +102,23 @@
                     android:textStyle="bold"/>
             </LinearLayout>
 
-        </LinearLayout>
 
-    </LinearLayout>
+<!-- </LinearLayout>
 
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="center_horizontal">
+
+    <com.swipeme.www.swipeme.ButtonPlus
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_button"
+        android:textSize="20dp"
+        android:text="Message"
+        android:textColor="#FFFFFF"
+        style="@style/button"/>
+    </LinearLayout> -->
+</LinearLayout>
 </LinearLayout>
