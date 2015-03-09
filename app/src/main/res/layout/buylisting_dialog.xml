@@ -32,7 +32,8 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp"
+                android:text="$4.20"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -56,21 +57,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#808080"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:text="4:20AM - 4:20PM"/>
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#808080"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:text="420 swipes available"/>
 
         <TextView
             android:id="@+id/restaurants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="#14b9d6"/>
+            android:textColor="#14b9d6"
+            android:text="De Neve\nCovel\nCafe 420\nBruin Plate"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -111,7 +115,8 @@
                     android:layout_height="40dp"
                     android:paddingTop="8dp"
                     android:textSize="15sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:text="Posted by Abitchsad Sahaha"/>
             </LinearLayout>
 
         </LinearLayout>
