@@ -24,14 +24,14 @@
         android:title="Dining Menus"
         android:orderInCategory="4"/>
 
-    <item android:id="@+id/action_notification"
+    <!--<item android:id="@+id/action_notification"
         android:title="@string/action_notifications"
         android:orderInCategory="5"
-        app:showAsAction="never"/>
+        app:showAsAction="never"/>-->
 
     <item android:id="@+id/action_logout"
         android:title="@string/action_logout"
-        android:orderInCategory="6"
+        android:orderInCategory="5"
         app:showAsAction="never"/>
 
 </menu>

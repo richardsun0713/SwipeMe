@@ -41,7 +41,7 @@ public class DiningMenuActivity extends FragmentActivity {
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         //String ua = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0";
         //webView.getSettings().setUserAgentString(ua);
-        webView.getSettings().setSupportZoom(true);
+        //webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
 
         webView.setWebViewClient(new WebViewClient() {

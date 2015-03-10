@@ -19,13 +19,13 @@
         app:showAsAction="never"/>
 
 
-    <item android:id="@+id/action_notification"
+    <!--<item android:id="@+id/action_notification"
         android:title="@string/action_notifications"
         android:orderInCategory="4"
-        app:showAsAction="never"/>
+        app:showAsAction="never"/>-->
 
     <item android:id="@+id/action_logout"
         android:title="@string/action_logout"
-        android:orderInCategory="5"
+        android:orderInCategory="3"
         app:showAsAction="never"/>
 </menu>
