@@ -253,15 +253,12 @@ public class BuyActivity extends FragmentActivity {
             int startTime = timeStringToInt(startTimeText);
             int endTime = timeStringToInt(endTimeText);
             Calendar calendar = Calendar.getInstance();
-            int currentTime = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
             Log.i("BuyActivity", "Current time: " + calendar.get(Calendar.HOUR_OF_DAY) +
                     ":" + calendar.get(Calendar.MINUTE));
 
-            //if (startTime >= endTime) {
-              //  startAlertDialog("The end time must be after the start time.");
-            //} //else if (currentTime < startTime || currentTime > endTime) {
-            //startAlertDialog("The set time period must include current time.");
-            //}
+            if (startTime >= endTime) {
+                startAlertDialog("The end time must be after the start time.");
+            }
             // Start new Buy Activity
             Intent intent = new Intent(this, BuyListingsActivity.class);
             intent.putStringArrayListExtra("checked_restaurants", getChecked);
@@ -289,6 +286,9 @@ public class BuyActivity extends FragmentActivity {
         int time = hour * 60 + minute;
         if (string.substring(6, 8).equals("PM")) {
             time += 12 * 60;
+        }
+        if ((hour == 12 || hour <= 3) && string.substring(6, 8).equals("AM")) {
+            time += 24 * 60;
         }
         Log.i("BuyActivity", "Time: " + time);
         return time;
