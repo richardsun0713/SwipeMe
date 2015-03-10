@@ -83,7 +83,22 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
                         .setPositiveButton("Delete Post", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                //TO DO: Delete Post
+                                // Perform action on click
+                                // Delete object from database
+                                object.deleteInBackground(new DeleteCallback() {
+                                    // Reload the adapter if deletion succeeded
+                                    @Override
+                                    public void done(ParseException e) {
+                                        if (e == null) {
+                                            Toast.makeText(getContext(),
+                                                    "Listing Successfully Deleted!", Toast.LENGTH_SHORT).show();
+                                            getMyListingAdapter().loadObjects();
+                                        }
+                                        else {
+                                            Log.e("MyListingAdapter", "Offer deletion failed");
+                                        }
+                                    }
+                                });
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
