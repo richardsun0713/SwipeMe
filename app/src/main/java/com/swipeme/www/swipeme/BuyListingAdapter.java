@@ -100,7 +100,35 @@ private Context context;
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 //TO DO: MESSAGE
+                                String recipientUserID = object.getString("userID");
+
+                                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                                query.include("activeMessages");
+                                query.whereEqualTo("username", recipientUserID);
+                                query.findInBackground(new FindCallback<ParseUser>() {
+                                    @Override
+                                    public void done(List<ParseUser> userList, ParseException e) {
+                                        if (e == null) {
+                                            String recipientObjectID = userList.get(0).getObjectId();
+
+//                            String currentUserObjectID = ParseUser.getCurrentUser().getObjectId();
+//                            ParseUser recipient = userList.get(0);
+//                            recipient.addUnique("activeMessages", currentUserObjectID);
+//                            Log.i("Messaging", currentUserObjectID);
+//                            recipient.saveInBackground();
+                                            ParseUser.getCurrentUser().addUnique("activeMessages", userList.get(0));
+                                            ParseUser.getCurrentUser().saveInBackground();
+
+                                            Intent intent = new Intent(context, MessagingActivity.class);
+                                            intent.putExtra("RECIPIENT_ID", recipientObjectID);
+                                            context.startActivity(intent);
+                                        } else {
+                                            Toast.makeText(context, "Unable to start chat",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
+
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {

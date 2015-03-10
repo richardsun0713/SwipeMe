@@ -78,7 +78,7 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
                 LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 
                 // Inflate and set the layout for the dialog
-                builder.setView(inflater.inflate(R.layout.buylisting_dialog, null))
+                builder.setView(inflater.inflate(R.layout.mylisting_dialog, null))
                         // Add action buttons
                         .setPositiveButton("Delete Post", new DialogInterface.OnClickListener() {
                             @Override
