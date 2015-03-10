@@ -129,6 +129,7 @@ public class MessagingActivity extends Activity {
         @Override
         public void onIncomingMessage(MessageClient client, Message message) {
             if (message.getSenderId().equals(recipientId)) {
+                Toast.makeText(getApplicationContext(), "Incoming Message from" + message.getSenderId(), Toast.LENGTH_LONG).show();
                 WritableMessage writableMessage = new WritableMessage(message.getRecipientIds().get(0), message.getTextBody());
                 messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_INCOMING);
             }

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -55,73 +54,42 @@ public class ListUsersActivity extends Activity {
         names = new ArrayList<String>();
         fbName = new ArrayList<String>();
 
-        //update our relations
-        ParseQuery<ParseUser> relations = ParseUser.getQuery();
-        relations.whereEqualTo("activeMessages", ParseUser.getCurrentUser());
-        relations.findInBackground(new FindCallback<ParseUser>() {
-            @Override
-            public void done(List<ParseUser> userList, ParseException e) {
-                if (e == null){
-                    for(int i = 0; i < userList.size(); i++){
-                        ParseUser.getCurrentUser().addUnique("activeMessages", userList.get(i));
-                        Log.i("List Users Activity", "Adding user to activeMessages array" + userList.get(i).getString("fbName"));
-                    }
-                    ParseUser.getCurrentUser().saveInBackground();
-                }else {
-                    Toast.makeText(getApplicationContext(),
-                            "Error loading user list",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        Log.i("List Users Activity", "Updating our own activeMessages array");
+//        //update our relations
+//        ParseQuery<ParseUser> relations = ParseUser.getQuery();
+//        relations.whereEqualTo("activeMessages", ParseUser.getCurrentUser());
+//        relations.findInBackground(new FindCallback<ParseUser>() {
+//            @Override
+//            public void done(List<ParseUser> userList, ParseException e) {
+//                if (e == null){
+//                    for(int i = 0; i < userList.size(); i++){
+//                        ParseUser.getCurrentUser().addUnique("activeMessages", userList.get(i));
+//                        Log.i("List Users Activity", "Adding user to activeMessages array" + userList.get(i).getString("fbName"));
+//                    }
+//                    ParseUser.getCurrentUser().saveInBackground();
+//                }else {
+//                    Toast.makeText(getApplicationContext(),
+//                            "Error loading user list",
+//                            Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
-
-        List<ParseUser> users = ParseUser.getCurrentUser().getList("activeMessages");
-
-        ParseUser.fetchAllIfNeededInBackground(users, new FindCallback<ParseUser>() {
-            @Override
-            public void done(List<ParseUser> userList, ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i < userList.size(); i++) {
-                        names.add(userList.get(i).getUsername());
-                        fbName.add(userList.get(i).getString("fbName"));
-                    }
-
-                    usersListView = (ListView)findViewById(R.id.usersListView);
-                    namesArrayAdapter =
-                            new ArrayAdapter<String>(getApplicationContext(),
-                                    R.layout.user_list_item, fbName);
-                    usersListView.setAdapter(namesArrayAdapter);
-
-                    usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-                            openConversation(names, i);
-                        }
-                    });
-
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Error loading user list",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-//        ParseQuery<ParseUser> query = ParseUser.getQuery();
-//        query.whereNotEqualTo("objectId", currentUserId);
-//        query.findInBackground(new FindCallback<ParseUser>() {
+//        List<ParseUser> users = ParseUser.getCurrentUser().getList("activeMessages");
+//
+//        ParseUser.fetchAllIfNeededInBackground(users, new FindCallback<ParseUser>() {
+//            @Override
 //            public void done(List<ParseUser> userList, ParseException e) {
 //                if (e == null) {
-//                    for (int i=0; i<userList.size(); i++) {
-//                        names.add(userList.get(i).getUsername().toString());
+//                    for (int i = 0; i < userList.size(); i++) {
+//                        names.add(userList.get(i).getUsername());
 //                        fbName.add(userList.get(i).getString("fbName"));
 //                    }
 //
 //                    usersListView = (ListView)findViewById(R.id.usersListView);
 //                    namesArrayAdapter =
-//                        new ArrayAdapter<String>(getApplicationContext(),
-//                            R.layout.user_list_item, fbName);
+//                            new ArrayAdapter<String>(getApplicationContext(),
+//                                    R.layout.user_list_item, fbName);
 //                    usersListView.setAdapter(namesArrayAdapter);
 //
 //                    usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -133,11 +101,43 @@ public class ListUsersActivity extends Activity {
 //
 //                } else {
 //                    Toast.makeText(getApplicationContext(),
-//                        "Error loading user list",
+//                            "Error loading user list",
 //                            Toast.LENGTH_LONG).show();
 //                }
 //            }
 //        });
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereNotEqualTo("objectId", currentUserId);
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> userList, ParseException e) {
+                if (e == null) {
+                    for (int i=0; i<userList.size(); i++) {
+                        names.add(userList.get(i).getUsername().toString());
+                        fbName.add(userList.get(i).getString("fbName"));
+                    }
+
+                    usersListView = (ListView)findViewById(R.id.usersListView);
+                    namesArrayAdapter =
+                        new ArrayAdapter<String>(getApplicationContext(),
+                            R.layout.user_list_item, fbName);
+                    usersListView.setAdapter(namesArrayAdapter);
+
+                    usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+                            openConversation(names, i);
+                        }
+                    });
+
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                        "Error loading user list",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
     //open a conversation with one person
@@ -179,6 +179,7 @@ public class ListUsersActivity extends Activity {
 
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("com.swipeme.www.swipeme.ListUsersActivity"));
     }
+
 
     @Override
     public void onResume() {
