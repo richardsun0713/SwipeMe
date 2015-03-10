@@ -1,8 +1,12 @@
 package com.swipeme.www.swipeme;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -67,12 +71,33 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
             @Override
             public void onClick(View v) {
 
-                // custom dialog
-                final Dialog dialog = new Dialog(context, R.style.Theme_CustomDialog);
-                dialog.setContentView(R.layout.mylisting_dialog);
+                // Create custom alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                // Get the layout inflater
+                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+
+                // Inflate and set the layout for the dialog
+                builder.setView(inflater.inflate(R.layout.buylisting_dialog, null))
+                        // Add action buttons
+                        .setPositiveButton("Delete Post", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                //TO DO: Delete Post
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                Dialog dialog = builder.create();
+                dialog.show();
+
 
                 // set the custom dialog components
                 TextView price = (TextView) dialog.findViewById(R.id.price);
+
                 price.setText(object.getString("price"));
 
                 TextView time = (TextView) dialog.findViewById(R.id.time);
@@ -81,32 +106,16 @@ public class MyListingAdapter extends ParseQueryAdapter<ParseObject> {
                 TextView quantity = (TextView) dialog.findViewById(R.id.quantity);
                 quantity.setText(object.getString("quantity") + " swipes available");
 
-                // TODO: implement GraphUser information for name
-                TextView facebookUserName = (TextView) dialog.findViewById(R.id.posted_by);
-                facebookUserName.setText("Posted by: Dummy User");
 
                 ArrayList<Object> list = new ArrayList<>(object.getList("restaurants"));
                 String [] restaurants = list.toArray(new String[list.size()]);
                 TextView restaurantsView = (TextView) dialog.findViewById(R.id.restaurants);
-                for (int i = 0; i < restaurants.length; i++)
-                {
+                for (int i = 0; i < restaurants.length; i++) {
                     if (i == 0)
                         restaurantsView.setText(restaurants[i] + "\n");
                     else
                         restaurantsView.append(restaurants[i] + "\n");
                 }
-
-                // set x button
-                Button dialogButton = (Button) dialog.findViewById(R.id.exit_button);
-                // if button is clicked, close the dialog
-                dialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
             }
         } );
 
