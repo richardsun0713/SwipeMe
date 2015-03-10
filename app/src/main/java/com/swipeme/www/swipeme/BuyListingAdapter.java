@@ -1,14 +1,13 @@
 package com.swipeme.www.swipeme;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -22,12 +21,6 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
-import android.content.Intent;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
-import android.app.Activity;
-
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -187,6 +180,7 @@ private Context context;
 
                             Intent intent = new Intent(context, MessagingActivity.class);
                             intent.putExtra("RECIPIENT_ID", recipientObjectID);
+                            intent.putExtra("fbName", userList.get(0).getString("fbName"));
                             context.startActivity(intent);
                         } else {
                                 Toast.makeText(context, "Unable to start chat",Toast.LENGTH_SHORT).show();

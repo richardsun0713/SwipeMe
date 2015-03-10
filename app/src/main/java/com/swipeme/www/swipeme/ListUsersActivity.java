@@ -149,6 +149,7 @@ public class ListUsersActivity extends Activity {
                if (e == null) {
                    Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
                    intent.putExtra("RECIPIENT_ID", user.get(0).getObjectId());
+                   intent.putExtra("fbName", user.get(0).getString("fbName"));
                    startActivity(intent);
                } else {
                    Toast.makeText(getApplicationContext(),
