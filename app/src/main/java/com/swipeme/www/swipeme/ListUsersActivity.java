@@ -1,6 +1,7 @@
 package com.swipeme.www.swipeme;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,11 +16,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ListUsersActivity extends Activity {
@@ -107,11 +111,57 @@ public class ListUsersActivity extends Activity {
 //            }
 //        });
 
+        final List<ParseObject> validUsers = null;
+
+        ParseQuery<ParseObject> senderQuery = new ParseQuery<ParseObject>("ParseMessage");
+        ParseQuery<ParseObject> recipientQuery = new ParseQuery<ParseObject>("ParseMessage");
+
+        senderQuery.whereEqualTo("senderId", currentUserId);
+        recipientQuery.whereEqualTo("recipientId", currentUserId);
+
+        senderQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if (e == null){
+                    validUsers.addAll(parseObjects);
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Error loading user list",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        recipientQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if (e == null){
+                    validUsers.addAll(parseObjects);
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Error loading user list",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereNotEqualTo("objectId", currentUserId);
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> userList, ParseException e) {
                 if (e == null) {
+
+                    for(Iterator<ParseUser> iterUser = userList.listIterator(); iterUser.hasNext();){
+                         ParseUser obj = iterUser.next();
+                         if (validUsers.contains()){
+                             continue;
+                             } else {
+                             iterUser.remove();
+                             }
+
+                     }
+
                     for (int i=0; i<userList.size(); i++) {
                         names.add(userList.get(i).getUsername().toString());
                         fbName.add(userList.get(i).getString("fbName"));
