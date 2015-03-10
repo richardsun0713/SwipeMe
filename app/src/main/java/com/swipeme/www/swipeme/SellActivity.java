@@ -2,6 +2,7 @@ package com.swipeme.www.swipeme;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -257,6 +258,12 @@ public class SellActivity extends FragmentActivity {
     final int[][] allStart={{7,6,6,8,12,21,21,18,21},{4,8,4,8,4,8,4,18,4},{4,8,4,8,4,8,4,18,4},{4,8,4,8,4,8,4,18,4},{4,8,4,8,4,8,4,18,4},{4,8,4,8,4,8,4,18,4},{7,6,6,8,12,21,21,18,21}};
     final String[] m_restaurantNames = new String[] {"Bruin Plate", "Covel", "De Neve", "Feast",
             "Bruin Cafe", "Cafe 1919", "Rendezvous", "De Neve Late Night", "Hedrick Late Night"};*/
+    private void startAlertDialog(String string) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SellActivity.this);
+        builder.setMessage(string);
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
     public void postOffer(View view)
     {
         ParseObject userOffer=new ParseObject("Offers");
@@ -409,37 +416,60 @@ public class SellActivity extends FragmentActivity {
             }
 
         }*/
-
-        userOffer.put("price", price_spinner.getSelectedItem().toString());
-        Log.i("LoginActivity", "price: " + price_spinner.getSelectedItem().toString());
-        userOffer.put("quantity",quantity_spinner.getSelectedItem().toString());
-        Log.i("LoginActivity", "quantity: " + quantity_spinner.getSelectedItem().toString());
-
-        userOffer.put("timeStart",startButton.getText());
-        Log.i("LoginActivity", "timeStart: " + startButton.getText());
-        userOffer.put("timeEnd",endButton.getText());
-        Log.i("LoginActivity", "timeEnd: " +endButton.getText());
-
-        if (timeStartDate != null) {
-            userOffer.put("timeStartDate", timeStartDate);
-            Log.i("LoginActivity", "timeStart: " + timeStartDate);
+        String start=startButton.getText().toString();
+        String end=endButton.getText().toString();
+        if(start.equals("Start Time")||end.equals("End Time"))
+        {
+            startAlertDialog("Please select Start and End Times.");
         }
-        if (timeEndDate != null) {
-            userOffer.put("timeEndDate", timeEndDate);
-            Log.i("LoginActivity", "timeEnd: " + timeEndDate);
+        else if(start.equals(end))
+        {
+            startAlertDialog("Start and End Times cannot be the same.");
         }
+        else
+        {
+
+            if(price_spinner.getSelectedItem().toString().equals("Select your price per swipe..."))
+            {
+                startAlertDialog("Please select price.");
+            }
+            else if(quantity_spinner.getSelectedItem().toString().equals("How many?")) {
+                startAlertDialog("Please select quantity.");
+            }
+            else
+            {
+                userOffer.put("price", price_spinner.getSelectedItem().toString());
+                Log.i("LoginActivity", "price: " + price_spinner.getSelectedItem().toString());
+                userOffer.put("quantity",quantity_spinner.getSelectedItem().toString());
+                Log.i("LoginActivity", "quantity: " + quantity_spinner.getSelectedItem().toString());
+
+                userOffer.put("timeStart",start);
+                Log.i("LoginActivity", "timeStart: " + start);
+                userOffer.put("timeEnd",end);
+                Log.i("LoginActivity", "timeEnd: " +end);
+
+                if (timeStartDate != null) {
+                    userOffer.put("timeStartDate", timeStartDate);
+                    Log.i("LoginActivity", "timeStart: " + timeStartDate);
+                }
+                if (timeEndDate != null) {
+                    userOffer.put("timeEndDate", timeEndDate);
+                    Log.i("LoginActivity", "timeEnd: " + timeEndDate);
+                }
 
 
-        userOffer.put("restaurants",restaurants);
-        userOffer.put("userID", user_ID);
-        Log.i("SellActivity", "userID: " + user_ID);
-        Toast.makeText(getApplicationContext(),
-                "Offer Successfully Posted!", Toast.LENGTH_LONG).show();
-        userOffer.saveInBackground();
+                userOffer.put("restaurants",restaurants);
+                userOffer.put("userID", user_ID);
+                Log.i("SellActivity", "userID: " + user_ID);
+                Toast.makeText(getApplicationContext(),
+                        "Offer Successfully Posted!", Toast.LENGTH_LONG).show();
+                userOffer.saveInBackground();
 
-        // Start MyListingActivity
-        Intent intent = new Intent(this, MyListingsActivity.class);
-        finish();
-        startActivity(intent);
+                // Start MyListingActivity
+                Intent intent = new Intent(this, MyListingsActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        }
     }
 }
