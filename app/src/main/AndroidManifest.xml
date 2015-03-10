@@ -12,7 +12,7 @@
 
     <permission android:protectionLevel="signature"
         android:name="com.swipeme.www.swipeme.permission.C2D_MESSAGE" />
-    <uses-permission android:name="com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.swipeme.www.swipeme.permission.C2D_MESSAGE" />
 
     <application
         android:name=".SwipeMeApplication"
