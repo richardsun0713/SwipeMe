@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -58,131 +59,84 @@ public class ListUsersActivity extends Activity {
         names = new ArrayList<String>();
         fbName = new ArrayList<String>();
 
-//        Log.i("List Users Activity", "Updating our own activeMessages array");
-//        //update our relations
-//        ParseQuery<ParseUser> relations = ParseUser.getQuery();
-//        relations.whereEqualTo("activeMessages", ParseUser.getCurrentUser());
-//        relations.findInBackground(new FindCallback<ParseUser>() {
-//            @Override
-//            public void done(List<ParseUser> userList, ParseException e) {
-//                if (e == null){
-//                    for(int i = 0; i < userList.size(); i++){
-//                        ParseUser.getCurrentUser().addUnique("activeMessages", userList.get(i));
-//                        Log.i("List Users Activity", "Adding user to activeMessages array" + userList.get(i).getString("fbName"));
-//                    }
-//                    ParseUser.getCurrentUser().saveInBackground();
-//                }else {
-//                    Toast.makeText(getApplicationContext(),
-//                            "Error loading user list",
-//                            Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-
-//        List<ParseUser> users = ParseUser.getCurrentUser().getList("activeMessages");
-//
-//        ParseUser.fetchAllIfNeededInBackground(users, new FindCallback<ParseUser>() {
-//            @Override
-//            public void done(List<ParseUser> userList, ParseException e) {
-//                if (e == null) {
-//                    for (int i = 0; i < userList.size(); i++) {
-//                        names.add(userList.get(i).getUsername());
-//                        fbName.add(userList.get(i).getString("fbName"));
-//                    }
-//
-//                    usersListView = (ListView)findViewById(R.id.usersListView);
-//                    namesArrayAdapter =
-//                            new ArrayAdapter<String>(getApplicationContext(),
-//                                    R.layout.user_list_item, fbName);
-//                    usersListView.setAdapter(namesArrayAdapter);
-//
-//                    usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-//                            openConversation(names, i);
-//                        }
-//                    });
-//
-//                } else {
-//                    Toast.makeText(getApplicationContext(),
-//                            "Error loading user list",
-//                            Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-
-        final List<ParseObject> validUsers = null;
+        final List<String> validUsers = new ArrayList<String>();
 
         ParseQuery<ParseObject> senderQuery = new ParseQuery<ParseObject>("ParseMessage");
-        ParseQuery<ParseObject> recipientQuery = new ParseQuery<ParseObject>("ParseMessage");
-
         senderQuery.whereEqualTo("senderId", currentUserId);
-        recipientQuery.whereEqualTo("recipientId", currentUserId);
 
         senderQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (e == null){
-                    validUsers.addAll(parseObjects);
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Error loading user list",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
-        recipientQuery.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> parseObjects, ParseException e) {
-                if (e == null){
-                    validUsers.addAll(parseObjects);
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Error loading user list",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+                    for (int i=0; i < parseObjects.size(); i++){
+                        Log.i("List Users Activity", "Found senderID:" + parseObjects.get(i).getString("senderId"));
 
-
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereNotEqualTo("objectId", currentUserId);
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> userList, ParseException e) {
-                if (e == null) {
-
-                    for(Iterator<ParseUser> iterUser = userList.listIterator(); iterUser.hasNext();){
-                         ParseUser obj = iterUser.next();
-                         if (validUsers.contains()){
-                             continue;
-                             } else {
-                             iterUser.remove();
-                             }
-
-                     }
-
-                    for (int i=0; i<userList.size(); i++) {
-                        names.add(userList.get(i).getUsername().toString());
-                        fbName.add(userList.get(i).getString("fbName"));
+                        if (!validUsers.contains(parseObjects.get(i).getString("recipientId"))){
+                            validUsers.add(parseObjects.get(i).getString("recipientId"));
+                        }
                     }
 
-                    usersListView = (ListView)findViewById(R.id.usersListView);
-                    namesArrayAdapter =
-                        new ArrayAdapter<String>(getApplicationContext(),
-                            R.layout.user_list_item, fbName);
-                    usersListView.setAdapter(namesArrayAdapter);
-
-                    usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    ParseQuery<ParseObject> recipientQuery = new ParseQuery<ParseObject>("ParseMessage");
+                    recipientQuery.whereEqualTo("recipientId", currentUserId);
+                    recipientQuery.findInBackground(new FindCallback<ParseObject>() {
                         @Override
-                        public void onItemClick(AdapterView<?> a, View v, int i, long l) {
-                            openConversation(names, i);
+                        public void done(List<ParseObject> parseObjects, ParseException e) {
+                            if (e == null){
+
+                                for (int i=0; i < parseObjects.size(); i++){
+                                    Log.i("List Users Activity", "Found recipientID:" + parseObjects.get(i).getString("recipientId"));
+
+                                    if (!validUsers.contains(parseObjects.get(i).getString("senderId"))){
+                                        validUsers.add(parseObjects.get(i).getString("senderId"));
+                                    }
+                                }
+
+                                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                                query.whereNotEqualTo("objectId", currentUserId);
+                                query.findInBackground(new FindCallback<ParseUser>() {
+                                    public void done(List<ParseUser> userList, ParseException e) {
+                                        if (e == null) {
+
+                                            for (int i=0; i<userList.size(); i++) {
+                                                if (validUsers.contains(userList.get(i).getObjectId().toString())){
+                                                    names.add(userList.get(i).getUsername().toString());
+                                                    fbName.add(userList.get(i).getString("fbName"));
+                                                }
+                                            }
+
+                                            usersListView = (ListView)findViewById(R.id.usersListView);
+                                            namesArrayAdapter =
+                                                    new ArrayAdapter<String>(getApplicationContext(),
+                                                            R.layout.user_list_item, fbName);
+                                            usersListView.setAdapter(namesArrayAdapter);
+
+                                            usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                @Override
+                                                public void onItemClick(AdapterView<?> a, View v, int i, long l) {
+                                                    openConversation(names, i);
+                                                }
+                                            });
+
+                                        } else {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Error loading user list",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+
+                            } else {
+                                Toast.makeText(getApplicationContext(),
+                                        "Error loading user list",
+                                        Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
 
                 } else {
                     Toast.makeText(getApplicationContext(),
-                        "Error loading user list",
+                            "Error loading user list",
                             Toast.LENGTH_LONG).show();
                 }
             }
