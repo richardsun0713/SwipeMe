@@ -145,7 +145,7 @@ private Context context;
 
                 // TODO: implement GraphUser information for name
                 TextView facebookUserName = (TextView) dialog.findViewById(R.id.posted_by);
-                facebookUserName.setText("Posted by: Dummy User");
+                facebookUserName.setText("Posted by: " + object.getString("fbName"));
 
                 ArrayList<Object> list = new ArrayList<>(object.getList("restaurants"));
                 String [] restaurants = list.toArray(new String[list.size()]);

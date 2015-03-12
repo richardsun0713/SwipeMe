@@ -3,43 +3,36 @@ package com.swipeme.www.swipeme;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewConfiguration;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.EditText;
+import android.widget.Toast;
 
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.lang.reflect.Field;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
-import android.widget.Toast;
 
 
 
@@ -461,6 +454,8 @@ public class SellActivity extends FragmentActivity {
                 userOffer.put("restaurants",restaurants);
                 userOffer.put("userID", user_ID);
                 Log.i("SellActivity", "userID: " + user_ID);
+
+                userOffer.put("fbName", ParseUser.getCurrentUser().getString("fbName"));
                 Toast.makeText(getApplicationContext(),
                         "Offer Successfully Posted!", Toast.LENGTH_LONG).show();
                 userOffer.saveInBackground();
