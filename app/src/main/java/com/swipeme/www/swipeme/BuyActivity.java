@@ -173,10 +173,10 @@ public class BuyActivity extends FragmentActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
         }
-        else if(id == R.id.action_display_times)
+        else */if(id == R.id.action_display_times)
         {
             Intent intent = new Intent(this, DiningTimesActivity.class);
             startActivity(intent);

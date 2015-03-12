@@ -1,11 +1,14 @@
 package com.swipeme.www.swipeme;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -46,7 +49,15 @@ public class MessagingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.messaging);
+        // Set Action Bar font
 
+        SpannableString s = new SpannableString("Messages");
+        s.setSpan(new TypefaceSpan(this, "LobsterTwo-Bold.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(s);
         bindService(new Intent(this, MessageService.class), serviceConnection, BIND_AUTO_CREATE);
 
         Intent intent = getIntent();

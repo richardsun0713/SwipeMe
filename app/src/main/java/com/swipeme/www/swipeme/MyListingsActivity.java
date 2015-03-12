@@ -1,8 +1,11 @@
 package com.swipeme.www.swipeme;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -31,6 +34,15 @@ public class MyListingsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_listings);
+        // Set Action Bar font
+
+        SpannableString s = new SpannableString("My Listings");
+        s.setSpan(new TypefaceSpan(this, "LobsterTwo-Bold.otf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(s);
 
         // Retrieve userID
         user_ID = ParseUser.getCurrentUser().getUsername();
@@ -56,9 +68,9 @@ public class MyListingsActivity extends FragmentActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+       /* if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 

@@ -187,10 +187,10 @@ public class SellActivity extends FragmentActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
         }
-        else if(id == R.id.action_display_menus)
+        else*/ if(id == R.id.action_display_menus)
         {
             startActivity(new Intent(this,DiningMenuActivity.class));
         }
